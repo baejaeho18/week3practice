@@ -22,7 +22,7 @@ public class TodoItem {
         this.title = title;
     }
 
-    public String getDesc() {
+	public String getDesc() {
         return desc;
     }
 
@@ -37,4 +37,10 @@ public class TodoItem {
     public void setCurrent_date(Date current_date) {
         this.current_date = current_date;
     }
+    
+    @Override
+	public String toString() {
+		return "[" + title + "]\t" + desc + " ( " + current_date + " )";
+		
+	}
 }
