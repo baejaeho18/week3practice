@@ -14,17 +14,19 @@ public class TodoMain {
 		TodoList l = new TodoList();
 		boolean isList = false;
 		boolean quit = false;
+		// 3_2 파일 저장
+		TodoUtil.loadList(l, "todolist.txt");			// ?????? 왜 자꾸 L로 자동변환되지???
 		do {
 //			int i=0;
 //			Menu.displaymenu(i);
-			Menu.displaymenu();
+			Menu.prompt();
 			isList = false;
 			String choice = sc.next();
 			switch (choice) {
 			case "help":
 //				i=1;
 //				Menu.displaymenu(i);
-				Menu.prompt();
+				Menu.displaymenu();
 				break;
 
 			case "add":
@@ -67,8 +69,8 @@ public class TodoMain {
 				System.out.println("정해진 명령어를 사용하십시오.\n도움이 필요하다면 help 명령어를 입력하시오.\n");
 				break;
 			}
-			
 			if(isList) l.listAll();
 		} while (!quit);
+		TodoUtil.saveList(l, "todolist.txt");
 	}
 }

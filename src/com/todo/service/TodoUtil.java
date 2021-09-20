@@ -1,5 +1,13 @@
 package com.todo.service;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import com.todo.dao.TodoItem;
@@ -9,7 +17,7 @@ public class TodoUtil {
 	
 	public static void createItem(TodoList list) {
 		
-		String title, desc;
+		String title, desc, current_date;
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.print("\n"
@@ -24,8 +32,9 @@ public class TodoUtil {
 		sc.nextLine();	// 왜 필요한지 알지?
 		System.out.print("세부 설명을 입력하시오.\n>");
 		desc = sc.nextLine();
-		
-		TodoItem t = new TodoItem(title, desc);
+		SimpleDateFormat f = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
+        current_date = f.format(new Date());
+		TodoItem t = new TodoItem(title, desc, current_date);
 		list.addItem(t);
 		System.out.println("등록이 완료되었습니다.\n");
 	}
@@ -74,7 +83,9 @@ public class TodoUtil {
 		for (TodoItem item : l.getList()) {
 			if (item.getTitle().equals(title)) {
 				l.deleteItem(item);
-				TodoItem t = new TodoItem(new_title, new_description);
+				SimpleDateFormat f = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
+		        String current_date = f.format(new Date());
+				TodoItem t = new TodoItem(new_title, new_description, current_date);
 				l.addItem(t);
 				System.out.println("수정이 완료되었습니다.\n");
 			}
@@ -86,8 +97,57 @@ public class TodoUtil {
 	public static void listAll(TodoList l) {
 		System.out.println("\n========== 모든 항목 출력");
 		for (TodoItem item : l.getList()) {
-			System.out.println("[" + item.getTitle() + "]\t" + item.getDesc());
+			System.out.println(item.toString());
 		}
 		System.out.println("");
 	}
+	
+	
+	// 프로그램 시작 시 읽기 & 종료 시 저장
+	public static void saveList(TodoList l, String filename) {
+		try {
+			File file = new File("todolist.txt");
+			Writer w = new FileWriter(filename);
+			int i=0;
+			for (TodoItem item : l.getList()) {
+				TodoItem t = new TodoItem(item.getTitle(), item.getDesc(), item.getCurrent_date());
+				w.write(t.toSaveString());
+				i++;
+			}
+			w.close();
+			System.out.println(i+"개의 항목이 "+filename+"에 저장되었습니다.");
+		}  catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}  catch (IOException e) {
+			e.printStackTrace();
+		}	
+	}
+	
+	
+	public static void loadList(TodoList l, String filename) {
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(filename));
+			String items;
+			int i=0;
+			while( (items = br.readLine()) != null) {
+				StringTokenizer st = new StringTokenizer(items, "##");
+				String title = st.nextToken();
+				String desc = st.nextToken();
+				String current_date = st.nextToken();
+				TodoItem t = new TodoItem(title, desc, current_date);
+				l.addItem(t);
+				i++;
+//				System.out.println(title+desc+current_date);
+			}
+			br.close();
+			System.out.println(i+"개의 항목이 "+filename+"에서 저장되었습니다.");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 }
