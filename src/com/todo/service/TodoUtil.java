@@ -26,7 +26,7 @@ public class TodoUtil {
 		
 		title = sc.next();
 		if (list.isDuplicate(title)) {
-			System.out.printf("이미 있는 항목 이름입니다.");
+			System.out.printf("이미 있는 항목 이름입니다.\n");
 			return;
 		}
 		sc.nextLine();	// 왜 필요한지 알지?
