@@ -31,7 +31,7 @@ public class TodoUtil {
 		sc.nextLine();	// 왜 필요한지 알지?
 		System.out.print("세부 설명을 입력하시오.\n>");
 		desc = sc.nextLine().trim();	// trim 앞뒤 공백 제거
-		System.out.print("기한을 입력하십시오(YYYYMMDD)\n>");
+		System.out.print("기한을 입력하십시오(YYYYMMDD).\n>");
 		due_date = sc.next();
 		TodoItem t = new TodoItem(category, title, desc, due_date);
 		list.addItem(t);
@@ -47,17 +47,20 @@ public class TodoUtil {
 		Scanner sc = new Scanner(System.in);
 		int num = sc.nextInt();
 		if (l.size() < num) System.out.println("해당 항목은 존재하지 않습니다.\n");
-//		for (TodoItem item : l.getList()) {
-//			if (title.equals(item.getTitle())) {
-//				l.deleteItem(item);
-//				System.out.println(title+"항목은 삭제되었습니다.\n");
-//				break;
+//		else {
+//			System.out.print(num+"번 항목을 삭제하시겠습니까? (y/n)");
+//			String choice = sc.next();
+//			if (choice.equals("y")) {
+//				l.deleteItem(num-1);
+//				System.out.println(num+"번 항목은 삭제되었습니다.\n");
+//			} else if(choice.equals("n")) {
+//				System.out.println("취소하셨습니다.\n");
+//			} else {
+//				System.out.println("올바른 명령어를 입력하여 주십시오.\n");
 //			}
 //		}
-		else {
-			l.deleteItem(num-1);
-			System.out.println(num+"번 항목은 삭제되었습니다.\n");
-		}
+		l.deleteItem(num-1);
+		System.out.println(num+"번 항목은 삭제되었습니다.\n");
 	}
 
 
@@ -84,7 +87,7 @@ public class TodoUtil {
 		sc.nextLine();
 		System.out.print("세부 설명을 입력하시오.\n>");
 		String new_description = sc.nextLine().trim();
-		System.out.print("기한을 입력하시오(YYYY/MM/DD).\n>");
+		System.out.print("기한을 입력하시오(YYYYMMDD).\n>");
 		String new_due_date = sc.next();
 //		for (TodoItem item : l.getList()) {
 //			if (item.getTitle().equals(title)) {
@@ -105,14 +108,25 @@ public class TodoUtil {
 	
 
 	public static void listAll(TodoList l) {
-//		System.out.println("\n========== 모든 항목 출력(총 "+l.size()+"개)");
+		System.out.println("\n========== 모든 항목 출력(총 "+l.size()+"개)");
 //		int serial_num = 1;
-//		for (TodoItem item : l.getList()) {
+		for (TodoItem item : l.getList()) {
 //			System.out.print(serial_num+". ");
-//			System.out.println(item.toString());
-//		}
-//		System.out.println("");	
-		l.listAll();	// TodoList의 listAll메소드를 활성화하면 위의 7줄을 이 1줄로 대체할 수 있음
+			System.out.print((l.indexOf(item)+1)+". ");
+			System.out.println(item.toString());
+//			serial_num++;
+		}
+		System.out.println("");	
+	}
+	
+	
+	public static void find(TodoList l) {
+		Scanner sc = new Scanner(System.in);
+		System.out.print("\n========== 제목 내용 검색\n키워드를 입력하십시오.\n>");
+		String keyword = sc.next();
+		for (TodoItem item : l.getList()) {
+			if (item.getTitle().contains(keyword) || item.getDesc().contains(keyword)) l.listAll(item);
+		}
 	}
 	
 	

@@ -42,7 +42,7 @@ public class TodoMain {
 				break;
 				
 			case "ls":
-				TodoUtil.listAll(l);
+				isList = true;
 				break;
 
 			case "ls_name_asc":
@@ -60,6 +60,24 @@ public class TodoMain {
 				l.sortByDate();
 				isList = true;
 				break;
+				
+			case "ls_date_desc":
+				l.sortByDate();
+				l.reverseList();	//comparator을 사용해서도 만들어 보자.
+				isList = true;
+				break;
+			
+			case "find":
+				TodoUtil.find(l);
+				break;
+				
+			case "find_cate":
+				
+				break;
+				
+			case "ls_cate":
+				
+				break;
 
 			case "exit":
 				quit = true;
@@ -69,7 +87,7 @@ public class TodoMain {
 				System.out.println("정해진 명령어를 사용하십시오.\n도움이 필요하다면 help 명령어를 입력하시오.\n");
 				break;
 			}
-			if(isList) l.listAll();
+			if(isList) TodoUtil.listAll(l);
 		} while (!quit);
 		TodoUtil.saveList(l, "todolist.txt");
 	}

@@ -40,17 +40,10 @@ public class TodoList {
 		return count;
 	}
 	
-	public void listAll() {
-		int count = list.size();
-		System.out.println("\n"
-				+ "========== 모든 항목 출력 (총 "+count+"개)");
-		int serial_num = 1;
-		for (TodoItem myitem : list) {
-			System.out.print(serial_num+". ");
-			System.out.println(myitem.toString());
-			serial_num++;
-		}
-		System.out.println();
+	// ls가 아닌 find용
+	public void listAll(TodoItem item) {
+		System.out.print(list.indexOf(item)+1 + ". ");
+		System.out.println(item.toString());
 	}
 	
 	public void reverseList() {
