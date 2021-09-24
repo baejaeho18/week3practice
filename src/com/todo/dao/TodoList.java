@@ -36,11 +36,16 @@ public class TodoList {
 	}
 
 	public void listAll() {
+		int count = list.size();
 		System.out.println("\n"
-				+ "========== 모든 항목 출력");
+				+ "========== 모든 항목 출력 (총 "+count+"개)");
+		int serial_num = 1;
 		for (TodoItem myitem : list) {
+			System.out.print(serial_num+". ");
 			System.out.println(myitem.toString());
+			serial_num++;
 		}
+		System.out.println();
 	}
 	
 	public void reverseList() {

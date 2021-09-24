@@ -17,24 +17,23 @@ public class TodoUtil {
 	
 	public static void createItem(TodoList list) {
 		
-		String title, desc, current_date;
+		String category, title, desc, due_date;
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.print("\n"
-				+ "========== 신규 항목 작성\n"
-				+ "항목 이름을 입력하십시오.\n>");
-		
+		System.out.print("\n========== 신규 항목 작성\n이름을 입력하십시오.\n>");
 		title = sc.next();
 		if (list.isDuplicate(title)) {
 			System.out.printf("이미 있는 항목 이름입니다.\n");
 			return;
 		}
+		System.out.print("카테고리를 입력하십시오.\n>");
+		category = sc.next();
 		sc.nextLine();	// 왜 필요한지 알지?
 		System.out.print("세부 설명을 입력하시오.\n>");
 		desc = sc.nextLine().trim();	// trim 앞뒤 공백 제거
-		SimpleDateFormat f = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
-        current_date = f.format(new Date());
-		TodoItem t = new TodoItem(title, desc, current_date);
+		System.out.print("기한을 입력하십시오(YYYY/MM/DD)\n>");
+		due_date = sc.next();
+		TodoItem t = new TodoItem(category, title, desc, due_date);
 		list.addItem(t);
 		System.out.println("등록이 완료되었습니다.\n");
 	}
@@ -77,15 +76,20 @@ public class TodoUtil {
 			System.out.println("이미 있는 항목 이름입니다.\n");
 			return;
 		}
+		System.out.print("카테고리 명을 입력하시오.\n>");
+		String new_category = sc.next();
 		sc.nextLine();
 		System.out.print("세부 설명을 입력하시오.\n>");
 		String new_description = sc.nextLine().trim();
+		System.out.print("기한을 입력하시오(YYYY/MM/DD).\n>");
+		String new_due_date = sc.next();
 		for (TodoItem item : l.getList()) {
 			if (item.getTitle().equals(title)) {
 				l.deleteItem(item);
-				SimpleDateFormat f = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
-		        String current_date = f.format(new Date());
-				TodoItem t = new TodoItem(new_title, new_description, current_date);
+//				SimpleDateFormat f = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
+//		        String current_date = f.format(new Date());
+//				TodoItem t = new TodoItem(new_title, new_description, current_date);
+				TodoItem t = new TodoItem(new_category, new_title, new_description, new_due_date);
 				l.addItem(t);
 				System.out.println("수정이 완료되었습니다.\n");
 			}
@@ -95,11 +99,12 @@ public class TodoUtil {
 	
 
 	public static void listAll(TodoList l) {
-		System.out.println("\n========== 모든 항목 출력");
-		for (TodoItem item : l.getList()) {
-			System.out.println(item.toString());
-		}
-		System.out.println("");
+////	System.out.println("\n========== 모든 항목 출력(총 "+l.size()+"개)");
+//		for (TodoItem item : l.getList()) {
+//			System.out.println(item.toString());
+//		}
+//		System.out.println("");
+		l.listAll();
 	}
 	
 	
@@ -108,14 +113,13 @@ public class TodoUtil {
 		try {
 			File file = new File("todolist.txt");
 			Writer w = new FileWriter(filename);
-			int i=0;
+			int count=0;
 			for (TodoItem item : l.getList()) {
-				TodoItem t = new TodoItem(item.getTitle(), item.getDesc(), item.getCurrent_date());
-				w.write(t.toSaveString());
-				i++;
+				w.write(item.toSaveString());
+				count++;
 			}
 			w.close();
-			System.out.println(i+"개의 항목이 "+filename+"에 저장되었습니다.");
+			System.out.println(count+"개의 항목이 "+filename+"에 저장되었습니다.");
 		}  catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}  catch (IOException e) {
@@ -128,20 +132,22 @@ public class TodoUtil {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(filename));
 			String items;
-			int i=0;
+			int count=0;
 			while( (items = br.readLine()) != null) {
 				StringTokenizer st = new StringTokenizer(items, "##");
+				String category = st.nextToken();
 				String title = st.nextToken();
 				String desc = st.nextToken();
+				String due_date = st.nextToken();
 				String current_date = st.nextToken();
-				TodoItem t = new TodoItem(title, desc, current_date);
-//				t.setCurrent_date(current_date);
+				TodoItem t = new TodoItem(category, title, desc, due_date);
+				t.setCurrent_date(current_date);
 				l.addItem(t);
-				i++;
+				count++;
 //				System.out.println(title+desc+current_date);
 			}
 			br.close();
-			System.out.println(i+"개의 항목이 "+filename+"에서 저장되었습니다.");
+			System.out.println(count+"개의 항목이 "+filename+"에서 저장되었습니다.");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
