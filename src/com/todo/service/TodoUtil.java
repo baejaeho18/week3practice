@@ -76,7 +76,7 @@ public class TodoUtil {
 		System.out.print("해당 항목에서 수정하려는 이름을 입력하시오.\n>");
 		String new_title = sc.next().trim();
 		if (l.isDuplicate(new_title)) {
-			System.out.println("이미 있는 항목 이름입니다.\n");
+			System.out.println("이미 있는 항목 이름입니다.\n");   
 			return;
 		}
 		System.out.print("카테고리 명을 입력하시오.\n>");
