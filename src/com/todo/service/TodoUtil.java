@@ -156,12 +156,14 @@ public class TodoUtil {
 		}
 		int count = 0;
 //		System.out.println(cates);
-		Iterator it = cates.iterator();
+//		Iterator it = cates.iterator();
 		for (String cate : cates) {
 			System.out.print("["+cate+"]");
 			count++;
 			if (count<cates.size()) System.out.print(" / ");
+//			if (it.hasNext()) System.out.print(" / ");			// 제대로 쓰려면 it.next()를 활용해보도록 하자.
 		}
+//		System.out.print("\b\b\b");
 		System.out.println("\n총 "+ count + "개의 카테고리가 등록되어 있습니다.\n");
 	}
 	
