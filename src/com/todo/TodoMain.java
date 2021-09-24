@@ -72,11 +72,11 @@ public class TodoMain {
 				break;
 				
 			case "find_cate":
-				
+				TodoUtil.find_cate(l);
 				break;
 				
 			case "ls_cate":
-				
+				TodoUtil.ls_cate(l);
 				break;
 
 			case "exit":

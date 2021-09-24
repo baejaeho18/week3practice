@@ -112,11 +112,10 @@ public class TodoUtil {
 //		int serial_num = 1;
 		for (TodoItem item : l.getList()) {
 //			System.out.print(serial_num+". ");
-			System.out.print((l.indexOf(item)+1)+". ");
-			System.out.println(item.toString());
 //			serial_num++;
+			l.listAll(item);
 		}
-		System.out.println("");	
+		System.out.println("");
 	}
 	
 	
@@ -124,9 +123,46 @@ public class TodoUtil {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("\n========== 제목 내용 검색\n키워드를 입력하십시오.\n>");
 		String keyword = sc.next();
+		int count=0;
 		for (TodoItem item : l.getList()) {
-			if (item.getTitle().contains(keyword) || item.getDesc().contains(keyword)) l.listAll(item);
+			if (item.getTitle().contains(keyword) || item.getDesc().contains(keyword)) {
+				l.listAll(item);
+				count++;
+			}
 		}
+		System.out.println("\n검색 결과 총 " + count + "개.\n");
+	}
+	
+	
+	public static void find_cate(TodoList l) {
+		Scanner sc = new Scanner(System.in);
+		System.out.print("\n========== 카테고리 검색\n키워드를 입력하십시오.\n>");
+		String keyword = sc.next();
+		int count=0;
+		for (TodoItem item : l.getList()) {
+			if (item.getCategory().contains(keyword)) {
+				l.listAll(item);
+				count++;
+			}
+		}
+		System.out.println("\n검색 결과 총 " + count + "개.\n");
+	}
+	
+	
+	public static void ls_cate(TodoList l) {
+		HashSet<String> cates = new HashSet<>();
+		for (TodoItem item : l.getList()) {
+			cates.add(item.getCategory());
+		}
+		int count = 0;
+//		System.out.println(cates);
+		Iterator it = cates.iterator();
+		for (String cate : cates) {
+			System.out.print("["+cate+"]");
+			count++;
+			if (count<cates.size()) System.out.print(" / ");
+		}
+		System.out.println("\n총 "+ count + "개의 카테고리가 등록되어 있습니다.\n");
 	}
 	
 	
@@ -146,7 +182,7 @@ public class TodoUtil {
 			e.printStackTrace();
 		}  catch (IOException e) {
 			e.printStackTrace();
-		}	
+		}
 	}
 	
 	
