@@ -40,37 +40,21 @@ public class TodoUtil {
 
 	
 	public static void deleteItem(TodoList l) {
-		System.out.print("\n"
-				+ "========== 기존 항목 삭제\n"
-				+ "삭제할 항목의 번호를 입력하시오.\n>");
-		
+		System.out.print("\n========== 기존 항목 삭제\n삭제할 항목의 번호를 입력하시오.\n>");
 		Scanner sc = new Scanner(System.in);
 		int num = sc.nextInt();
-		if (l.size() < num) System.out.println("해당 항목은 존재하지 않습니다.\n");
-//		else {
-//			System.out.print(num+"번 항목을 삭제하시겠습니까? (y/n)");
-//			String choice = sc.next();
-//			if (choice.equals("y")) {
-//				l.deleteItem(num-1);
-//				System.out.println(num+"번 항목은 삭제되었습니다.\n");
-//			} else if(choice.equals("n")) {
-//				System.out.println("취소하셨습니다.\n");
-//			} else {
-//				System.out.println("올바른 명령어를 입력하여 주십시오.\n");
-//			}
-//		}
+		if (l.size() < num) {
+			System.out.println("해당 항목은 존재하지 않습니다.\n");
+			return;
+		}
 		l.deleteItem(num-1);
 		System.out.println(num+"번 항목은 삭제되었습니다.\n");
 	}
 
 
 	public static void updateItem(TodoList l) {
-		
 		Scanner sc = new Scanner(System.in);
-		
-		System.out.print("\n"
-				+ "========== 기존 항목 수정\n"
-				+ "수정할 항목 번호를 입력하시오.\n>" );
+		System.out.print("\n========== 기존 항목 수정\n수정할 항목 번호를 입력하시오.\n>" );
 		int num = sc.nextInt();
 		if (l.size() < num) {
 			System.out.println("존재하지 않는 항목입니다.\n");
@@ -89,17 +73,6 @@ public class TodoUtil {
 		String new_description = sc.nextLine().trim();
 		System.out.print("기한을 입력하시오(YYYYMMDD).\n>");
 		String new_due_date = sc.next();
-//		for (TodoItem item : l.getList()) {
-//			if (item.getTitle().equals(title)) {
-//				l.deleteItem(item);
-////				SimpleDateFormat f = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
-////		        String current_date = f.format(new Date());
-////				TodoItem t = new TodoItem(new_title, new_description, current_date);
-//				TodoItem t = new TodoItem(new_category, new_title, new_description, new_due_date);
-//				l.addItem(t);
-//				System.out.println("수정이 완료되었습니다.\n");
-//			}
-//		}
 		l.deleteItem(num-1);
 		TodoItem t = new TodoItem(new_category, new_title, new_description, new_due_date);
 		l.addItem(t);
@@ -119,33 +92,32 @@ public class TodoUtil {
 	}
 	
 	
-	public static void find(TodoList l) {
-		Scanner sc = new Scanner(System.in);
-		System.out.print("\n========== 제목 내용 검색\n키워드를 입력하십시오.\n>");
-		String keyword = sc.next();
+	public static void find(TodoList l, String keyword) {
+		System.out.print("\n========== 제목 내용 검색\n");
+		String new_keyword = keyword.substring(1,keyword.length()-1);
 		int count=0;
 		for (TodoItem item : l.getList()) {
-			if (item.getTitle().contains(keyword) || item.getDesc().contains(keyword)) {
+			if (item.getTitle().contains(new_keyword) || item.getDesc().contains(keyword)) {
 				l.listAll(item);
 				count++;
 			}
 		}
-		System.out.println("\n검색 결과 총 " + count + "개.\n");
+		System.out.println("검색 결과 총 " + count + "개.\n");
 	}
 	
 	
-	public static void find_cate(TodoList l) {
-		Scanner sc = new Scanner(System.in);
-		System.out.print("\n========== 카테고리 검색\n키워드를 입력하십시오.\n>");
-		String keyword = sc.next();
+	public static void find_cate(TodoList l, String cate_keyword) {
+		System.out.print("\n========== 카테고리 검색");
+		String new_keyword = cate_keyword.substring(1, cate_keyword.length()-1);
+		System.out.println(" ("+new_keyword+")");
 		int count=0;
 		for (TodoItem item : l.getList()) {
-			if (item.getCategory().contains(keyword)) {
+			if (item.getCategory().contains(new_keyword)) {
 				l.listAll(item);
 				count++;
 			}
 		}
-		System.out.println("\n검색 결과 총 " + count + "개.\n");
+		System.out.println("검색 결과 총 " + count + "개.\n");
 	}
 	
 	
@@ -163,7 +135,7 @@ public class TodoUtil {
 			if (count<cates.size()) System.out.print(" / ");
 //			if (it.hasNext()) System.out.print(" / ");			// 제대로 쓰려면 it.next()를 활용해보도록 하자.
 		}
-//		System.out.print("\b\b\b");
+//		System.out.print("\b\b\b");								// 이런 무식한 백스페이스 말고,,,
 		System.out.println("\n총 "+ count + "개의 카테고리가 등록되어 있습니다.\n");
 	}
 	

@@ -40,7 +40,7 @@ public class TodoList {
 		return count;
 	}
 	
-	// ls가 아닌 find용
+	// ls와 find 모두 쓸수 있게 하자
 	public void listAll(TodoItem item) {
 		System.out.print(list.indexOf(item)+1 + ". ");
 		System.out.println(item.toString());

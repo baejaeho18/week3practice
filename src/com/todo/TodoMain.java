@@ -68,11 +68,13 @@ public class TodoMain {
 				break;
 			
 			case "find":
-				TodoUtil.find(l);
+				String keyword = sc.next();
+				TodoUtil.find(l, keyword);
 				break;
 				
 			case "find_cate":
-				TodoUtil.find_cate(l);
+				String cate_keyword = sc.next();
+				TodoUtil.find_cate(l, cate_keyword);
 				break;
 				
 			case "ls_cate":

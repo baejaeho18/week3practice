@@ -63,14 +63,33 @@ public class TodoItem {
         this.current_date = current_date;
     }
     
-    @Override
-	public String toString() {
-		return "["+ category +"]\t"+ title +"\t"+ desc +"\t"+ 
-				 due_date.substring(0,4)+"/"+due_date.substring(4,6)+"/"+due_date.substring(6,8)
-				+"\t( "+ current_date +" )";
-	}
-    
+//  due_date를 YYMMDD로 입력받을 때 사용하기
+//	public String toString() {
+//    	String pre_year="";
+//		switch (due_date.substring(0)) {
+//		case "0": case "1": case"2": case"3": case"4": case"5":
+//			pre_year = "20";
+//			break;
+//		case"6": case"7": case"8": case"9":
+//			pre_year = "19";
+//			break;
+//		default: 
+//			System.out.println("년도를 알맞게 입력했는지 확인하십시오.\n");
+//			pre_year = "??";
+//			break;
+//		}
+//    	return "["+ category +"]\t"+ title +"\t"+ desc +"\t"+ 
+//				 pre_year+due_date.substring(0,2)+"/"+due_date.substring(2,4)+"/"+due_date.substring(4,6)
+//				+"\t( "+ current_date +" )";
+//	}    
     public String toSaveString() {
     	return category+"##"+title+"##"+desc+"##"+due_date+"##"+current_date+"\n";
     }
+
+	@Override
+	public String toString() {
+		return "["+ category +"]\t"+ title +"\t"+ desc +"\t"+ 
+				 due_date.substring(0,4)+"/"+due_date.substring(4,6)+"/"+due_date.substring(6,8)
+   			+"\t( "+ current_date +" )";
+	}
 }
