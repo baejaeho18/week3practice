@@ -16,8 +16,8 @@ public class TodoList {
 		list.add(t);
 	}
 
-	public void deleteItem(TodoItem t) {
-		list.remove(t);
+	public void deleteItem(int num) {
+		list.remove(num);
 	}
 
 	void editItem(TodoItem t, TodoItem updated) {
@@ -35,6 +35,11 @@ public class TodoList {
 
 	}
 
+	public int size() {
+		int count = list.size();
+		return count;
+	}
+	
 	public void listAll() {
 		int count = list.size();
 		System.out.println("\n"

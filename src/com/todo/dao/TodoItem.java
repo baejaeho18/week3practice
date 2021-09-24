@@ -65,7 +65,9 @@ public class TodoItem {
     
     @Override
 	public String toString() {
-		return "["+ category +"]\t"+ title +"\t"+ desc +"\t"+ due_date +"\t( "+ current_date +" )";
+		return "["+ category +"]\t"+ title +"\t"+ desc +"\t"+ 
+				 due_date.substring(0,4)+"/"+due_date.substring(4,6)+"/"+due_date.substring(6,8)
+				+"\t( "+ current_date +" )";
 	}
     
     public String toSaveString() {
