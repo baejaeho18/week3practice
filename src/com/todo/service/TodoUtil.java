@@ -31,7 +31,7 @@ public class TodoUtil {
 		}
 		sc.nextLine();	// 왜 필요한지 알지?
 		System.out.print("세부 설명을 입력하시오.\n>");
-		desc = sc.nextLine();
+		desc = sc.nextLine().trim();	// trim 앞뒤 공백 제거
 		SimpleDateFormat f = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
         current_date = f.format(new Date());
 		TodoItem t = new TodoItem(title, desc, current_date);
@@ -135,6 +135,7 @@ public class TodoUtil {
 				String desc = st.nextToken();
 				String current_date = st.nextToken();
 				TodoItem t = new TodoItem(title, desc, current_date);
+//				t.setCurrent_date(current_date);
 				l.addItem(t);
 				i++;
 //				System.out.println(title+desc+current_date);
