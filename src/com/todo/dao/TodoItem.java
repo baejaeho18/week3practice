@@ -10,7 +10,7 @@ public class TodoItem {
     private String desc;
     private String current_date;
 	private String due_date;
-	private int comp;
+	private int comp;	// is_completed
 
     public TodoItem(String category, String title, String desc, String due_date){
     	this.category = category;

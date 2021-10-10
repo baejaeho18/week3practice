@@ -13,7 +13,7 @@ public class Menu {
         System.out.println("3. edit\t\t항목 수정");
         System.out.println("4. comp <번호>\t완료 체크");
         System.out.println("5. ls\t\t모든 항목 출력");
-        System.out.println("6. ls_name_asc\t이름순으로 정렬");
+        System.out.println("6. ls_name\t이름순으로 정렬");
         System.out.println("7. ls_name_desc\t이름 역순으로 정렬");
         System.out.println("8. ls_date\t마감일 순서대로 정렬");
         System.out.println("9. ls_date_desc\t마감일 역순으로 정렬");

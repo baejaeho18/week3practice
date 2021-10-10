@@ -12,7 +12,7 @@ public class TodoMain {
 	
 		Scanner sc = new Scanner(System.in);
 		TodoList l = new TodoList();
-		l.importData("todolist.txt");
+//		l.importData("todolist.txt");
 		boolean quit = false;
 		// 3_2 파일 저장
 //		TodoUtil.loadList(l, "todolist.txt");			// ?????? 왜 자꾸 L로 자동변환되지???
@@ -21,8 +21,6 @@ public class TodoMain {
 			String choice = sc.next();
 			switch (choice) {
 			case "help":
-//				i=1;
-//				Menu.displaymenu(i);
 				Menu.displaymenu();
 				break;
 
@@ -42,7 +40,7 @@ public class TodoMain {
 				TodoUtil.listAll(l);
 				break;
 
-			case "ls_name_asc":
+			case "ls_name":
 				TodoUtil.listAll(l, "title", 1);
 				break;
 

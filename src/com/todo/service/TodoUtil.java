@@ -1,13 +1,5 @@
 package com.todo.service;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 import com.todo.dao.TodoItem;
@@ -17,70 +9,64 @@ public class TodoUtil {
 	
 	public static void createItem(TodoList list) {
 		String category, title, desc, due_date;
-		Scanner sc = new Scanner(System.in);
+		Scanner s = new Scanner(System.in);
 		System.out.print("\n========== 신규 항목 작성\n이름을 입력하십시오.\n>");
-		title = sc.next();
+		title = s.next();
 		if (list.isDuplicate(title)) {
 			System.out.printf("이미 있는 항목 이름입니다.\n");
-			sc.close();
 			return;
 		}
 		System.out.print("카테고리를 입력하십시오.\n>");
-		category = sc.next();
-		sc.nextLine();	// 왜 필요한지 알지?
+		category = s.next();
+		s.nextLine();	// 왜 필요한지 알지?
 		System.out.print("세부 설명을 입력하시오.\n>");
-		desc = sc.nextLine().trim();	// trim 앞뒤 공백 제거
+		desc = s.nextLine().trim();	// trim 앞뒤 공백 제거
 		System.out.print("기한을 입력하십시오(YYYYMMDD).\n>");
-		due_date = sc.next();
+		due_date = s.next();
 		TodoItem t = new TodoItem(category, title, desc, due_date);
 		if(list.addItem(t) > 0) System.out.println("등록이 완료되었습니다.\n");
-		sc.close();
 	}
+	/// TA세션 질문!!!! sc.close() -> s.close() 안되는 이유?
 
 	public static void deleteItem(TodoList l) {
 		System.out.print("\n========== 기존 항목 삭제\n삭제할 항목의 번호를 입력하시오.\n>");
-		Scanner sc = new Scanner(System.in);
-		int id = sc.nextInt();
+		Scanner s = new Scanner(System.in);
+		int id = s.nextInt();
 		if (l.getCount() < id) {
 			System.out.println("해당 항목은 존재하지 않습니다.\n");
-			sc.close();
 			return;
 		}
 		if(l.deleteItem(id)>0) System.out.println(id+"번 항목은 삭제되었습니다.\n");	// id는 db일련번호로 1부터 시작
-		sc.close();
 	}
 
 	public static void updateItem(TodoList l) {
-		Scanner sc = new Scanner(System.in);
+		Scanner s = new Scanner(System.in);
 		System.out.print("\n========== 기존 항목 수정\n수정할 항목 번호를 입력하시오.\n>" );
-		int id = sc.nextInt();
-		for (TodoItem item : l.getList()) {
-			int cnt=0;
-			if (item.getId() != id) cnt++;
-			if(l.getCount() == cnt) {
-				System.out.println("존재하지 않는 항목입니다.\n");
-				sc.close();
-				return;
-			}
-		}
+		int id = s.nextInt();
+//		for (TodoItem item : l.getList()) {
+//			int cnt=0;
+//			if (item.getId() != id) cnt++;
+//			if(l.getCount() == cnt) {
+//				System.out.println("존재하지 않는 항목입니다.\n");
+//				return;
+//			}
+//		}
 		System.out.print("해당 항목에서 수정하려는 이름을 입력하시오.\n>");
-		String new_title = sc.next().trim();
+		String new_title = s.next().trim();
 		if (l.isDuplicate(new_title)) {
-			System.out.println("이미 있는 항목 이름입니다.\n");   
-			sc.close();
+			System.out.println("이미 있는 항목 이름입니다.\n");
 			return;
 		}
 		System.out.print("카테고리 명을 입력하시오.\n>");
-		String new_category = sc.next();
-		sc.nextLine();
+		String new_category = s.next();
+		s.nextLine();
 		System.out.print("세부 설명을 입력하시오.\n>");
-		String new_description = sc.nextLine().trim();
+		String new_description = s.nextLine().trim();
 		System.out.print("기한을 입력하시오(YYYYMMDD).\n>");
-		String new_due_date = sc.next();
-		l.deleteItem(id);
+		String new_due_date = s.next();
 		TodoItem t = new TodoItem(new_category, new_title, new_description, new_due_date);
-		if(l.updateItem(t) > 0) System.out.println("수정이 완료되었습니다.\n");
-		sc.close();
+		if(l.updateItem(t, id) > 0) System.out.println("수정이 완료되었습니다.\n");
+		else System.out.println("수정이 실패하였습니다. 입력이 제대로 되었는지 확인하십시오.\n");
 	}
 	
 	public static void listAll(TodoList l) {
@@ -100,27 +86,24 @@ public class TodoUtil {
 		System.out.println("");
 	}
 	
-
 	public static void find(TodoList l, String keyword) {
 		System.out.print("\n========== 제목 내용 검색\n");
 		int count=0;
 		for (TodoItem item : l.getList(keyword)) {
-			System.out.println(item.toString());
+			System.out.print(item.toString());
 			count++;
 		}
-		System.out.println("검색 결과 총 " + count + "개.\n");
+		System.out.println("\n검색 결과 총 " + count + "개.\n");
 	}
-	
 	public static void find_cate(TodoList l, String cate_keyword) {
 		System.out.print("\n========== 카테고리 검색\n");
 		int count =0;
 		for (TodoItem item : l.getCategory(cate_keyword)) {
-			System.out.println(item.toString());
+			System.out.print(item.toString());
 			count ++;
 		}
 		System.out.println("\n검색 결과 총 "+ count + "개.\n");
 	}
-	
 	public static void ls_cate(TodoList l) {
 		System.out.print("\n========== 카테고리 종류\n");
 		int count =0;
@@ -133,16 +116,15 @@ public class TodoUtil {
 	
 	public static void comp(TodoList l, int complete) {
 		int count = l.completeItem(complete);
-		if(count == 0) System.out.println("\n해당 번호로 등록된 항목이 존재하지않습니다.\n");
+		if(l.completeItem(complete) == 0) System.out.println("\n해당 번호로 등록된 항목이 존재하지않습니다.\n");
 		else System.out.println("\n총 "+ count + "개의 항목이 완료체크되었습니다.\n");
 		// 나중엔 번호 여러개 입력 받아서 한번에? while(sc.next();)?
 	}
-	
 	public static void find_comp(TodoList l) {
 		System.out.print("\n========== 완료된 항목만 확인\n");
 		int count=0;
 		for (TodoItem item : l.getComp()) {
-			System.out.print(item);
+			System.out.print(item.toString());
 			count ++;
 		}
 		System.out.println("\n검색 결과 총 "+ count + "개.\n");
