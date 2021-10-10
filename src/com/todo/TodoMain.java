@@ -12,15 +12,12 @@ public class TodoMain {
 	
 		Scanner sc = new Scanner(System.in);
 		TodoList l = new TodoList();
-		boolean isList = false;
+		l.importData("todolist.txt");
 		boolean quit = false;
 		// 3_2 파일 저장
 		TodoUtil.loadList(l, "todolist.txt");			// ?????? 왜 자꾸 L로 자동변환되지???
 		do {
-//			int i=0;
-//			Menu.displaymenu(i);
 			Menu.prompt();
-			isList = false;
 			String choice = sc.next();
 			switch (choice) {
 			case "help":
@@ -42,38 +39,32 @@ public class TodoMain {
 				break;
 				
 			case "ls":
-				isList = true;
+				TodoUtil.listAll(l);
 				break;
 
 			case "ls_name_asc":
-				l.sortByName();
-				isList = true;
+				TodoUtil.listAll(l, "title", 1);
 				break;
 
 			case "ls_name_desc":
-				l.sortByName();
-				l.reverseList();
-				isList = true;
+				TodoUtil.listAll(l, "title", 0);
 				break;
 				
 			case "ls_date":
-				l.sortByDate();
-				isList = true;
+				TodoUtil.listAll(l, "due_date", 1);
 				break;
 				
 			case "ls_date_desc":
-				l.sortByDate();
-				l.reverseList();	//comparator을 사용해서도 만들어 보자.
-				isList = true;
+				TodoUtil.listAll(l, "due_date", 0);
 				break;
 			
 			case "find":
-				String keyword = sc.next();
+				String keyword = sc.next().trim();
 				TodoUtil.find(l, keyword);
 				break;
 				
 			case "find_cate":
-				String cate_keyword = sc.next();
+				String cate_keyword = sc.next().trim();
 				TodoUtil.find_cate(l, cate_keyword);
 				break;
 				
@@ -89,8 +80,8 @@ public class TodoMain {
 				System.out.println("정해진 명령어를 사용하십시오.\n도움이 필요하다면 help 명령어를 입력하시오.\n");
 				break;
 			}
-			if(isList) TodoUtil.listAll(l);
 		} while (!quit);
-		TodoUtil.saveList(l, "todolist.txt");
+//		TodoUtil.saveList(l, "todolist.txt");
+		sc.close();
 	}
 }

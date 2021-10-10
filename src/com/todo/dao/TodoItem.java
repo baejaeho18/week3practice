@@ -4,29 +4,31 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 
 public class TodoItem {
+	private int id;
 	private String category;
     private String title;
     private String desc;
-//  private Date current_date;
     private String current_date;
-    private String due_date;
+	private String due_date;
 
     public TodoItem(String category, String title, String desc, String due_date){
-//  public TodoItem(String title, String desc, String current_date){
     	this.category = category;
         this.title=title;
         this.desc=desc;
-        // 3_2 포맷 바꾸기
-//      this.current_date=current_date;
         SimpleDateFormat f = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
         this.current_date = f.format(new Date());
         this.due_date = due_date;
     }
-    
+    public int getId() {
+		return id;
+	}
+    public void setId(int id) {
+		this.id = id;
+	}
+	
     public String getCategory() {
 		return category;
 	}
-
 	public void setCategory(String category) {
 		this.category = category;
 	}
@@ -34,7 +36,6 @@ public class TodoItem {
 	public String getDue_date() {
 		return due_date;
 	}
-
 	public void setDue_date(String due_date) {
 		this.due_date = due_date;
 	}
@@ -42,7 +43,6 @@ public class TodoItem {
 	public String getTitle() {
         return title;
     }
-
     public void setTitle(String title) {
         this.title = title;
     }
@@ -50,7 +50,6 @@ public class TodoItem {
 	public String getDesc() {
         return desc;
     }
-
     public void setDesc(String desc) {
         this.desc = desc;
     }
@@ -58,7 +57,6 @@ public class TodoItem {
     public String getCurrent_date() {
         return current_date;
     }
-
     public void setCurrent_date(String current_date) {
         this.current_date = current_date;
     }
@@ -82,14 +80,14 @@ public class TodoItem {
 //				 pre_year+due_date.substring(0,2)+"/"+due_date.substring(2,4)+"/"+due_date.substring(4,6)
 //				+"\t( "+ current_date +" )";
 //	}    
-    public String toSaveString() {
-    	return category+"##"+title+"##"+desc+"##"+due_date+"##"+current_date+"\n";
-    }
-
+//    
+//    public String toSaveString() {
+//    	return category+"##"+title+"##"+desc+"##"+due_date+"##"+current_date+"\n\n";
+//    }
 	@Override
 	public String toString() {
-		return "["+ category +"]\t"+ title +"\t"+ desc +"\t"+ 
+		return id + "  ["+ category +"]\t"+ title +"\t"+ desc +"\t"+ 
 				 due_date.substring(0,4)+"/"+due_date.substring(4,6)+"/"+due_date.substring(6,8)
-   			+"\t( "+ current_date +" )";
+   			+"\t( "+ current_date +" )\n";
 	}
 }
