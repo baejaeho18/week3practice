@@ -27,8 +27,8 @@ public class TodoList {
 		try {
 			br = new BufferedReader(new FileReader(filename));
 			String line;
-			String sql = "insert into list (title, memo, category, current_date, due_date)"+
-					" values (?,?,?,?,?);";
+			String sql = "insert into list (title, memo, category, current_date, due_date, comp)"+
+					" values (?,?,?,?,?,0);";
 			int records = 0;
 			while((line = br.readLine()) != null) {
 				StringTokenizer st = new StringTokenizer(line, "##");
@@ -58,8 +58,8 @@ public class TodoList {
 	}
 
 	public int addItem(TodoItem t) {
-		String sql = "insert into list (title, memo, category, current_date, due_date)"+
-				" values (?,?,?,?,?);";
+		String sql = "insert into list (title, memo, category, current_date, due_date, comp)"+
+				" values (?,?,?,?,?,0);";
 		PreparedStatement pstmt;
 		int count =0;
 		try {
@@ -121,9 +121,11 @@ public class TodoList {
 				String desc = rs.getString("memo");
 				String due_date = rs.getString("due_date");
 				String current_date = rs.getString("current_date");
+				int comp = rs.getInt("comp");
 				TodoItem t = new TodoItem(category, title, desc, due_date);	// java:카테고리##이름##설명##마감##등록시간	db:번호##이름##설명##카테고리##마감##등록시간
 				t.setId(id);
 				t.setCurrent_date(current_date);
+				t.setComp(comp);
 				list.add(t);
 			}
 			stmt.close();
@@ -162,9 +164,11 @@ public class TodoList {
 				String desc = rs.getString("memo");
 				String due_date = rs.getString("due_date");
 				String current_date = rs.getString("current_date");
+				int comp = rs.getInt("comp");
 				TodoItem t = new TodoItem(category, title, desc, due_date);	// java:카테고리##이름##설명##마감##등록시간	db:번호##이름##설명##카테고리##마감##등록시간
 				t.setId(id);
 				t.setCurrent_date(current_date);
+				t.setComp(comp);
 				list.add(t);
 			}
 			pstmt.close();
@@ -188,9 +192,11 @@ public class TodoList {
 				String desc = rs.getString("memo");
 				String due_date = rs.getString("due_date");
 				String current_date = rs.getString("current_date");
+				int comp = rs.getInt("comp");
 				TodoItem t = new TodoItem(category, title, desc, due_date);	// java:카테고리##이름##설명##마감##등록시간	db:번호##이름##설명##카테고리##마감##등록시간
 				t.setId(id);
 				t.setCurrent_date(current_date);
+				t.setComp(comp);
 				list.add(t);
 			}
 			stmt.close();
@@ -229,15 +235,57 @@ public class TodoList {
 				String desc = rs.getString("memo");
 				String due_date = rs.getString("due_date");
 				String current_date = rs.getString("current_date");
+				int comp = rs.getInt("comp");
 				TodoItem t = new TodoItem(category, title, desc, due_date);	// java:카테고리##이름##설명##마감##등록시간	db:번호##이름##설명##카테고리##마감##등록시간
 				t.setId(id);
 				t.setCurrent_date(current_date);
+				t.setComp(comp);
 				list.add(t);
 			}
 			prtmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} return list;
+	}
+	
+	public ArrayList<TodoItem> getComp(){
+		ArrayList<TodoItem> list = new ArrayList<TodoItem>();
+		PreparedStatement prtmt;
+		String sql = "Select * from list where comp =?;";
+		try {
+			prtmt = conn.prepareStatement(sql);
+			prtmt.setInt(1, 1);
+			ResultSet rs = prtmt.executeQuery();
+			while(rs.next()) {
+				int id = rs.getInt("id");
+				String category = rs.getString("category");
+				String title = rs.getString("title");
+				String desc = rs.getString("memo");
+				String due_date = rs.getString("due_date");
+				String current_date = rs.getString("current_date");
+				TodoItem t = new TodoItem(category, title, desc, due_date);
+				t.setId(id);
+				t.setCurrent_date(current_date);
+				t.setComp(1);
+				list.add(t);
+			}
+			prtmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} return list;
+	}
+	public int completeItem(int complete) {
+		PreparedStatement prtmt;
+		String sql = "update list set comp = 1 where id =?";
+		int count = 0;
+		try {
+			prtmt = conn.prepareStatement(sql);
+			prtmt.setInt(1, complete);
+			count = prtmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
 	}
 	
 	/*

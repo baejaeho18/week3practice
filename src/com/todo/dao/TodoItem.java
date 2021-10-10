@@ -10,6 +10,7 @@ public class TodoItem {
     private String desc;
     private String current_date;
 	private String due_date;
+	private int comp;
 
     public TodoItem(String category, String title, String desc, String due_date){
     	this.category = category;
@@ -18,6 +19,7 @@ public class TodoItem {
         SimpleDateFormat f = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
         this.current_date = f.format(new Date());
         this.due_date = due_date;
+        this.comp = 0;
     }
     public int getId() {
 		return id;
@@ -26,7 +28,14 @@ public class TodoItem {
 		this.id = id;
 	}
 	
-    public String getCategory() {
+    public int getComp() {
+		return comp;
+	}
+	public void setComp(int comp) {
+		this.comp = comp;
+	}
+	
+	public String getCategory() {
 		return category;
 	}
 	public void setCategory(String category) {
@@ -86,7 +95,9 @@ public class TodoItem {
 //    }
 	@Override
 	public String toString() {
-		return id + "  ["+ category +"]\t"+ title +"\t"+ desc +"\t"+ 
+		String iscomp = "";
+		if(comp != 0) iscomp = "(¿Ï·á)";
+		return id + "  ["+ category +"]\t"+ title + iscomp +"\t"+ desc +"\t"+ 
 				 due_date.substring(0,4)+"/"+due_date.substring(4,6)+"/"+due_date.substring(6,8)
    			+"\t( "+ current_date +" )\n";
 	}

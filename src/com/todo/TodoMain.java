@@ -15,7 +15,7 @@ public class TodoMain {
 		l.importData("todolist.txt");
 		boolean quit = false;
 		// 3_2 파일 저장
-		TodoUtil.loadList(l, "todolist.txt");			// ?????? 왜 자꾸 L로 자동변환되지???
+//		TodoUtil.loadList(l, "todolist.txt");			// ?????? 왜 자꾸 L로 자동변환되지???
 		do {
 			Menu.prompt();
 			String choice = sc.next();
@@ -71,7 +71,16 @@ public class TodoMain {
 			case "ls_cate":
 				TodoUtil.ls_cate(l);
 				break;
-
+			
+			case "comp":
+				int complete = sc.nextInt();
+				TodoUtil.comp(l, complete);
+				break;
+				
+			case "ls_comp":
+				TodoUtil.find_comp(l);
+				break;
+				
 			case "exit":
 				quit = true;
 				break;

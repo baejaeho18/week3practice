@@ -130,6 +130,23 @@ public class TodoUtil {
 		}
 		System.out.println("\n총 "+ count + "개의 카테고리가 등록되어 있습니다.\n");
 	}
+	
+	public static void comp(TodoList l, int complete) {
+		int count = l.completeItem(complete);
+		if(count == 0) System.out.println("\n해당 번호로 등록된 항목이 존재하지않습니다.\n");
+		else System.out.println("\n총 "+ count + "개의 항목이 완료체크되었습니다.\n");
+		// 나중엔 번호 여러개 입력 받아서 한번에? while(sc.next();)?
+	}
+	
+	public static void find_comp(TodoList l) {
+		System.out.print("\n========== 완료된 항목만 확인\n");
+		int count=0;
+		for (TodoItem item : l.getComp()) {
+			System.out.print(item);
+			count ++;
+		}
+		System.out.println("\n검색 결과 총 "+ count + "개.\n");
+	}
 		
 	
 	
@@ -152,32 +169,31 @@ public class TodoUtil {
 //			e.printStackTrace();
 //		}
 //	}
-	
-	public static void loadList(TodoList l, String filename) {
-		try {
-			BufferedReader br = new BufferedReader(new FileReader(filename));
-			String items;
-			int count=0;
-			while( (items = br.readLine()) != null) {
-				StringTokenizer st = new StringTokenizer(items, "##");
-				String category = st.nextToken();
-				String title = st.nextToken();
-				String desc = st.nextToken();
-				String due_date = st.nextToken();
-				String current_date = st.nextToken();
-				TodoItem t = new TodoItem(category, title, desc, due_date);
-				t.setCurrent_date(current_date);
-				l.addItem(t);
-				count++;
-//				System.out.println(title+desc+current_date);
-			}
-			br.close();
-			System.out.println(count+"개의 항목이 "+filename+"에서 저장되었습니다.");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+//	public static void loadList(TodoList l, String filename) {
+//		try {
+//			BufferedReader br = new BufferedReader(new FileReader(filename));
+//			String items;
+//			int count=0;
+//			while( (items = br.readLine()) != null) {
+//				StringTokenizer st = new StringTokenizer(items, "##");
+//				String category = st.nextToken();
+//				String title = st.nextToken();
+//				String desc = st.nextToken();
+//				String due_date = st.nextToken();
+//				String current_date = st.nextToken();
+//				TodoItem t = new TodoItem(category, title, desc, due_date);
+//				t.setCurrent_date(current_date);
+//				l.addItem(t);
+//				count++;
+////				System.out.println(title+desc+current_date);
+//			}
+//			br.close();
+//			System.out.println(count+"개의 항목이 "+filename+"에서 저장되었습니다.");
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
 	
 }
