@@ -11,6 +11,8 @@ public class TodoItem {
     private String current_date;
 	private String due_date;
 	private int comp;	// is_completed
+	private int imp;
+	private int mate;
 
     public TodoItem(String category, String title, String desc, String due_date){
     	this.category = category;
@@ -20,6 +22,8 @@ public class TodoItem {
         this.current_date = f.format(new Date());
         this.due_date = due_date;
         this.comp = 0;
+        this.imp = 0;
+        this.mate = 0;
     }
     public int getId() {
 		return id;
@@ -35,6 +39,19 @@ public class TodoItem {
 		this.comp = comp;
 	}
 	
+	public int getImp() {
+		return imp;
+	}
+	public void setImp(int imp) {
+		this.imp = imp;
+	}
+	
+	public int getMate() {
+		return mate;
+	}
+	public void setMate(int mate) {
+		this.mate = mate;
+	}
 	public String getCategory() {
 		return category;
 	}
@@ -70,7 +87,7 @@ public class TodoItem {
         this.current_date = current_date;
     }
     
-//  due_date를 YYMMDD로 입력받을 때 사용하기
+////  due_date를 YYMMDD로 입력받을 때 사용하기
 //	public String toString() {
 //    	String pre_year="";
 //		switch (due_date.substring(0)) {
@@ -89,15 +106,21 @@ public class TodoItem {
 //				 pre_year+due_date.substring(0,2)+"/"+due_date.substring(2,4)+"/"+due_date.substring(4,6)
 //				+"\t( "+ current_date +" )";
 //	}    
-//    
-//    public String toSaveString() {
-//    	return category+"##"+title+"##"+desc+"##"+due_date+"##"+current_date+"\n\n";
-//    }
+    
+    public String toSaveString() {
+    	return category+"##"+title+"##"+desc+"##"+due_date+"##"+current_date+"\n";
+    }
 	@Override
 	public String toString() {
+		String isimp ="";
+		for (int i=0;i<imp;i++) {
+			isimp += "*";
+		}
 		String iscomp = "";
 		if(comp != 0) iscomp = "(완료)";
-		return id + "  ["+ category +"]\t"+ title + iscomp +"\t"+ desc +"\t"+ 
+		String mate_num ="";
+		if(mate>0) mate_num= " ("+mate+"명)";
+		return id + "  ["+ category +"]\t"+ title + iscomp +"\t"+ desc + mate_num +"\t"+ isimp +
 				 due_date.substring(0,4)+"/"+due_date.substring(4,6)+"/"+due_date.substring(6,8)
    			+"\t( "+ current_date +" )\n";
 	}

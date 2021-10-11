@@ -78,6 +78,14 @@ public class TodoMain {
 			case "ls_comp":
 				TodoUtil.find_comp(l);
 				break;
+			
+			case "importance":
+				int impo_id = sc.nextInt();
+				TodoUtil.importance(l, impo_id);
+				break;
+			case "mate":
+				TodoUtil.mate(l);
+				break;
 				
 			case "exit":
 				quit = true;
@@ -88,7 +96,7 @@ public class TodoMain {
 				break;
 			}
 		} while (!quit);
-//		TodoUtil.saveList(l, "todolist.txt");
+		TodoUtil.saveList(l, "todolist.txt");
 		sc.close();
 	}
 }

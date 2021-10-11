@@ -1,5 +1,4 @@
 birth##cho##lyn##20211011##2021/09/24 23:23:30
-birth##lee##wonjae##20210825##2021/09/24 23:16:42
 birth##dad##myungnam##20210830##2021/09/24 23:10:54
 birth##kim##musyung##20210715##2021/09/24 23:10:26
 birth##bae##jaeho##20210208##2021/09/24 23:09:48
@@ -8,3 +7,4 @@ homework##data##structure##20210101##2021/09/25 24:39:14
 class##absent##vaccine##20221231##2021/09/25 24:39:42
 club##linux##hackers##20100101##2021/09/25 24:40:01
 work##parttime-job##burgur-king##20220911##2021/09/25 24:40:32
+homework##cal3##154pg-157pg##20211028##2021/10/10 21:52:33

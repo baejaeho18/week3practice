@@ -1,5 +1,9 @@
 package com.todo.service;
 
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.*;
 
 import com.todo.dao.TodoItem;
@@ -129,28 +133,44 @@ public class TodoUtil {
 		}
 		System.out.println("\n검색 결과 총 "+ count + "개.\n");
 	}
+
+	public static void importance(TodoList l, int impo_id) {
+		System.out.print("\n========== 중요도 지정\n해당 항목의 중요도를 입력하시오(0~3)\n>");
+		Scanner s = new Scanner(System.in);
+		int important = s.nextInt();
+		if (l.importance(impo_id, important) > 0) System.out.println("\n"+impo_id+"번 항목이 중요도 "+important+"(으)로 지정되었습니다.\n");
+		else System.out.println("\n중요도 지정 실패. 숫자를 알맞게 입력했는지 확인하시오.\n");
+	}
+
+	public static void mate(TodoList l) {
+		Scanner s = new Scanner(System.in);
+		System.out.print("\n========== 참여 인원수 기입\n기입할 항목 번호를 입력하시오\n>");
+		int mate_id = s.nextInt();
+		System.out.print("최대 참여 인원수를 입력하시오\n>");
+		int member = s.nextInt();
+		if(l.mate(mate_id, member) > 0) System.out.println("\n인원수 기입이 완료되었습니다!\n");
+		else System.out.println("\n존재하지 않는 번호입니다.\n");
+	}
 		
 	
-	
-	
-//	 // 프로그램 시작 시 읽기 & 종료 시 저장
-//	public static void saveList(TodoList l, String filename) {
-//		try {
-//			//File file = new File("todolist.txt");
-//			Writer w = new FileWriter(filename);
-//			int count=0;
-//			for (TodoItem item : l.getList()) {
-//				w.write(item.toSaveString());
-//				count++;
-//			}
-//			w.close();
-//			System.out.println(count+"개의 항목이 "+filename+"에 저장되었습니다.");
-//		}  catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//		}  catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//	}
+	 // 프로그램 시작 시 읽기 & 종료 시 저장
+	public static void saveList(TodoList l, String filename) {
+		try {
+			//File file = new File("todolist.txt");
+			Writer w = new FileWriter(filename);
+			int count=0;
+			for (TodoItem item : l.getList()) {
+				w.write(item.toSaveString());
+				count++;
+			}
+			w.close();
+			System.out.println(count+"개의 항목이 "+filename+"에 저장되었습니다.");
+		}  catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}  catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 //	public static void loadList(TodoList l, String filename) {
 //		try {
 //			BufferedReader br = new BufferedReader(new FileReader(filename));
