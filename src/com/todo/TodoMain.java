@@ -83,8 +83,15 @@ public class TodoMain {
 				int impo_id = sc.nextInt();
 				TodoUtil.importance(l, impo_id);
 				break;
+			case "ls_importance":
+				TodoUtil.listAll(l, "importance", 0);
+				break;
 			case "mate":
 				TodoUtil.mate(l);
+				break;
+			case "find_mate":
+				int mates = sc.nextInt();
+				TodoUtil.find_mate(l, mates);
 				break;
 				
 			case "exit":

@@ -21,8 +21,10 @@ public class Menu {
         System.out.println("11. ls_comp\t완료된 항목들 출력");
         System.out.println("12. find <키워드>\t제목과 내용에서 키워드 검색");
         System.out.println("13. find_cate <키워드>\t카테고리에서 키워드 검색");
-        System.out.println("new! 14. importance <번호> \t중요도 지정");
-        System.out.println("new! 15. mate <번호> \t참여할 인원수 입력");
+        System.out.println("new! 14. importance<번호>\t중요도 지정");
+        System.out.println("new! 15. ls_importance\t중요도 순서대로 검색");
+        System.out.println("new! 16. mate <번호>\t참여할 인원수 입력");
+        System.out.println("new! 17. find_mate <번호>\t동일한 참여자수를 가직 항목 출력");
         System.out.println("14. exit\t나가기\n");
     }
 }

@@ -375,4 +375,35 @@ public class TodoList {
 			e.printStackTrace();
 		} return count;
 	}
+
+	public ArrayList<TodoItem> getMate(int mates){
+		ArrayList<TodoItem> list = new ArrayList<TodoItem>();
+		PreparedStatement prtmt;
+		String sql = "Select * from list where mate =?;";
+		try {
+			prtmt = conn.prepareStatement(sql);
+			prtmt.setInt(1, mates);
+			ResultSet rs = prtmt.executeQuery();
+			while(rs.next()) {
+				int id = rs.getInt("id");
+				String category = rs.getString("category");
+				String title = rs.getString("title");
+				String desc = rs.getString("memo");
+				String due_date = rs.getString("due_date");
+				String current_date = rs.getString("current_date");
+				int imp = rs.getInt("importance");
+				int mate = rs.getInt("mate");
+				TodoItem t = new TodoItem(category, title, desc, due_date);	// java:카테고리##이름##설명##마감##등록시간	db:번호##이름##설명##카테고리##마감##등록시간
+				t.setId(id);
+				t.setCurrent_date(current_date);
+				t.setComp(1);
+				t.setImp(imp);
+				t.setMate(mate);
+				list.add(t);
+			}
+			prtmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} return list;
+	}
 }

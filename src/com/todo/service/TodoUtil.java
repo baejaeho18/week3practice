@@ -197,5 +197,16 @@ public class TodoUtil {
 //			e.printStackTrace();
 //		}
 //	}
+
+
+	public static void find_mate(TodoList l, int mates) {
+		System.out.printf("\n========== 참여자 수가 %d명인 항목을 검색합니다.\n", mates);
+		int count=0;
+		for (TodoItem item : l.getMate(mates)) {
+			System.out.print(item.toString());
+			count ++;
+		}
+		System.out.println("\n검색 결과 총 "+ count + "개.\n");
+	}
 	
 }
