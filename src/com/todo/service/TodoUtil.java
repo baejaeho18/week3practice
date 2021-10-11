@@ -138,8 +138,12 @@ public class TodoUtil {
 		System.out.print("\n========== 중요도 지정\n해당 항목의 중요도를 입력하시오(0~3)\n>");
 		Scanner s = new Scanner(System.in);
 		int important = s.nextInt();
+		if (important < 0 || important > 3) {
+			System.out.println("숫자를 알맞게 입력했는지 확인하시오.\n");
+			return;
+		}
 		if (l.importance(impo_id, important) > 0) System.out.println("\n"+impo_id+"번 항목이 중요도 "+important+"(으)로 지정되었습니다.\n");
-		else System.out.println("\n중요도 지정 실패. 숫자를 알맞게 입력했는지 확인하시오.\n");
+		else System.out.println("\n중요도 지정 실패. 존재하지 않는 항목입니다.\n");
 	}
 
 	public static void mate(TodoList l) {
