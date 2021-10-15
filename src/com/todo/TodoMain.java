@@ -1,5 +1,6 @@
 package com.todo;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.todo.dao.TodoList;
@@ -71,7 +72,8 @@ public class TodoMain {
 				break;
 			
 			case "comp":
-				int complete = sc.nextInt();
+				String complete = sc.nextLine().trim();
+				System.out.println(complete);
 				TodoUtil.comp(l, complete);
 				break;
 				

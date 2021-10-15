@@ -296,18 +296,24 @@ public class TodoList {
 			e.printStackTrace();
 		} return list;
 	}
-	public int completeItem(int complete) {
-		PreparedStatement prtmt;
-		String sql = "update list set comp = 1 where id =?";
+	public int completeItem(String complete) {
+		String[] comp;
+		comp=complete.split(" ");
+		System.out.println(comp);
 		int count = 0;
-		try {
-			prtmt = conn.prepareStatement(sql);
-			prtmt.setInt(1, complete);
-			count = prtmt.executeUpdate();
-			prtmt.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} return count;
+		for(int i=0;i<comp.length;i++) {
+			PreparedStatement prtmt;
+			String sql = "update list set comp = 1 where id =?";
+			try {
+				prtmt = conn.prepareStatement(sql);
+				prtmt.setString(1, comp[i]);
+				count += prtmt.executeUpdate();
+				prtmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return count;
 	}
 	
 	/*
@@ -405,5 +411,33 @@ public class TodoList {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} return list;
+	}
+	
+	
+	public Boolean isDuplicate_cate(String new_cate) {
+		ArrayList<TodoItem> l = new ArrayList<TodoItem>();
+		Statement stmt;
+		String sql = "Select * from list;";
+		try {
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				String category = rs.getString("category");
+				String title = rs.getString("title");
+				String desc = rs.getString("memo");
+				String due_date = rs.getString("due_date");
+				TodoItem t = new TodoItem(category, title, desc, due_date);
+				l.add(t);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		for (TodoItem item : l ) {
+			if (new_cate.equals(item.getCategory())) return true;
+		}
+		return false;
+	}
+	public void creatCate(TodoList l) {
+		
 	}
 }

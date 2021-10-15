@@ -118,9 +118,9 @@ public class TodoUtil {
 		System.out.println("\n총 "+ count + "개의 카테고리가 등록되어 있습니다.\n");
 	}
 	
-	public static void comp(TodoList l, int complete) {
+	public static void comp(TodoList l, String complete) {
 		int count = l.completeItem(complete);
-		if(l.completeItem(complete) == 0) System.out.println("\n해당 번호로 등록된 항목이 존재하지않습니다.\n");
+		if(count == 0) System.out.println("\n해당 번호로 등록된 항목이 존재하지않습니다.\n");
 		else System.out.println("\n총 "+ count + "개의 항목이 완료체크되었습니다.\n");
 		// 나중엔 번호 여러개 입력 받아서 한번에? while(sc.next();)?
 	}

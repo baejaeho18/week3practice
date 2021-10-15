@@ -8,3 +8,4 @@ class##absent##vaccine##20221231##2021/09/25 24:39:42
 club##linux##hackers##20100101##2021/09/25 24:40:01
 work##parttime-job##burgur-king##20220911##2021/09/25 24:40:32
 homework##cal3##154pg-157pg##20211028##2021/10/10 21:52:33
+birth##jaeho##me##20220208##2021/10/15 13:09:41
