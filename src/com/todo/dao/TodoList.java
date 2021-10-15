@@ -77,17 +77,20 @@ public class TodoList {
 		} return count;
 	}
 
-	public int deleteItem(int id) {
-		String sql = "delete from list where id=?;";
+	public int deleteItem(String[] id) {
 		int count=0;
-		PreparedStatement pstmt;
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, id);
-			count = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} return count;
+		for(int i=0;i<id.length;i++) {
+			String sql = "delete from list where id=?;";
+			PreparedStatement pstmt;
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, id[i]);
+				count += pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return count;
 	}
 
 	public int updateItem(TodoItem t, int id) {
@@ -299,7 +302,6 @@ public class TodoList {
 	public int completeItem(String complete) {
 		String[] comp;
 		comp=complete.split(" ");
-		System.out.println(comp);
 		int count = 0;
 		for(int i=0;i<comp.length;i++) {
 			PreparedStatement prtmt;

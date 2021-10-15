@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import com.todo.dao.TodoItem;
@@ -35,11 +36,9 @@ public class TodoUtil {
 	public static void deleteItem(TodoList l) {
 		System.out.print("\n========== 기존 항목 삭제\n삭제할 항목의 번호를 입력하시오.\n>");
 		Scanner s = new Scanner(System.in);
-		int id = s.nextInt();
-		if (l.getCount() < id) {
-			System.out.println("해당 항목은 존재하지 않습니다.\n");
-			return;
-		}
+		String ids = s.nextLine();
+		String[] id;
+		id = ids.split(" ");
 		if(l.deleteItem(id)>0) System.out.println(id+"번 항목은 삭제되었습니다.\n");	// id는 db일련번호로 1부터 시작
 	}
 
@@ -77,15 +76,26 @@ public class TodoUtil {
 		System.out.println("\n========== 모든 항목 출력(총 "+l.getCount()+"개)\n");
 //		int serial_num = 1;
 		for (TodoItem item : l.getList()) {
-			System.out.print(item.toString());
-//			l.listAll(item);
+			Date today = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			String current = sdf.format(today);
+			if(Integer.parseInt(item.getDue_date()) - Integer.parseInt(current) <= 7 && item.getComp()==0) {
+				System.err.print(item.toString());
+			}
+			else System.out.print(item.toString());
 		}
 		System.out.println("");
 	}
 	public static void listAll(TodoList l, String orderby, int odering) {
 		System.out.println("\n========== 모든 항목 출력(총 "+l.getCount()+"개)\n");
 		for (TodoItem item : l.getOrderedList(orderby, odering)) {
-			System.out.print(item.toString());
+			Date today = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			String current = sdf.format(today);
+			if(Integer.parseInt(item.getDue_date()) - Integer.parseInt(current) <= 7 && item.getComp()==0) {
+				System.err.print(item.toString());
+			}
+			else System.out.print(item.toString());
 		}
 		System.out.println("");
 	}
@@ -94,7 +104,13 @@ public class TodoUtil {
 		System.out.print("\n========== 제목 내용 검색\n");
 		int count=0;
 		for (TodoItem item : l.getList(keyword)) {
-			System.out.print(item.toString());
+			Date today = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			String current = sdf.format(today);
+			if(Integer.parseInt(item.getDue_date()) - Integer.parseInt(current) <= 7 && item.getComp()==0) {
+				System.err.print(item.toString());
+			}
+			else System.out.print(item.toString());
 			count++;
 		}
 		System.out.println("\n검색 결과 총 " + count + "개.\n");
@@ -103,7 +119,13 @@ public class TodoUtil {
 		System.out.print("\n========== 카테고리 검색\n");
 		int count =0;
 		for (TodoItem item : l.getCategory(cate_keyword)) {
-			System.out.print(item.toString());
+			Date today = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			String current = sdf.format(today);
+			if(Integer.parseInt(item.getDue_date()) - Integer.parseInt(current) <= 7 && item.getComp()==0) {
+				System.err.print(item.toString());
+			}
+			else System.out.print(item.toString());
 			count ++;
 		}
 		System.out.println("\n검색 결과 총 "+ count + "개.\n");
@@ -128,7 +150,13 @@ public class TodoUtil {
 		System.out.print("\n========== 완료된 항목만 확인\n");
 		int count=0;
 		for (TodoItem item : l.getComp()) {
-			System.out.print(item.toString());
+			Date today = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			String current = sdf.format(today);
+			if(Integer.parseInt(item.getDue_date()) - Integer.parseInt(current) <= 7 && item.getComp()==0) {
+				System.err.print(item.toString());
+			}
+			else System.out.print(item.toString());
 			count ++;
 		}
 		System.out.println("\n검색 결과 총 "+ count + "개.\n");
@@ -207,7 +235,13 @@ public class TodoUtil {
 		System.out.printf("\n========== 참여자 수가 %d명인 항목을 검색합니다.\n", mates);
 		int count=0;
 		for (TodoItem item : l.getMate(mates)) {
-			System.out.print(item.toString());
+			Date today = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			String current = sdf.format(today);
+			if(Integer.parseInt(item.getDue_date()) - Integer.parseInt(current) <= 7 && item.getComp()==0) {
+				System.err.print(item.toString());
+			}
+			else System.out.print(item.toString());
 			count ++;
 		}
 		System.out.println("\n검색 결과 총 "+ count + "개.\n");

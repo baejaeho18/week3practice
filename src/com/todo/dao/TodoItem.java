@@ -1,7 +1,9 @@
 package com.todo.dao;
 
 import java.util.Date;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 
 public class TodoItem {
 	private int id;
@@ -116,10 +118,17 @@ public class TodoItem {
 		for (int i=0;i<imp;i++) {
 			isimp += "*";
 		}
+		
 		String iscomp = "";
 		if(comp != 0) iscomp = "(¿Ï·á)";
+		
 		String mate_num ="";
 		if(mate>0) mate_num= " ("+mate+"¸í)";
+		
+//		String date_due = due_date.substring(0,4)+"-"+due_date.substring(4,6)+"-"+due_date.substring(6,8);
+//		Date d = Date.valueOf(date_due);
+//		LocalTime time = LocalTime.now();
+		
 		return id + "  ["+ category +"]\t"+ title + iscomp +"\t"+ desc + mate_num +"\t"+ isimp +
 				 due_date.substring(0,4)+"/"+due_date.substring(4,6)+"/"+due_date.substring(6,8)
    			+"\t( "+ current_date +" )\n";

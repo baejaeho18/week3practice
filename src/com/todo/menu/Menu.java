@@ -9,9 +9,9 @@ public class Menu {
     public static void displaymenu() {
     	System.out.println("\n========== 도움말");
     	System.out.println("1. add\t\t신규 항목 등록");
-        System.out.println("2. del\t\t항목 제거");
+        System.out.println("2. del\t\t항목 제거(복수 가능)");
         System.out.println("3. edit\t\t항목 수정");
-        System.out.println("4. comp <번호>\t완료 체크");
+        System.out.println("4. comp <들>\t완료 체크(복수 가능)");
         System.out.println("5. ls\t\t모든 항목 출력");
         System.out.println("6. ls_name\t이름순으로 정렬");
         System.out.println("7. ls_name_desc\t이름 역순으로 정렬");
