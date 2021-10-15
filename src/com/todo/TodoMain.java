@@ -101,7 +101,7 @@ public class TodoMain {
 				quit = true;
 				break;
 				
-			case "calemdar":
+			case "calendar":
 				CalendarMaker.showMaker(l);
 				break;
 				

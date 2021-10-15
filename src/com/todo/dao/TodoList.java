@@ -442,29 +442,33 @@ public class TodoList {
 	
 	public ArrayList<TodoItem> getDate(int q) {
 		ArrayList<TodoItem> list = new ArrayList<TodoItem>();
-		PreparedStatement prtmt;
-		String sql = "Select * from list where due_date=?;";
-//		String sql = "select * from list where category like '%?%';";
-		try {
-			prtmt = conn.prepareStatement(sql);
-			if(q<10) prtmt.setString(1, "2021100"+q);
-			if(q>=10) prtmt.setString(1, "202110"+q);
-			ResultSet rs = prtmt.executeQuery();
-			while(rs.next()) {
-				String category = rs.getString("category");
-				String title = rs.getString("title");
-				String desc = rs.getString("memo");
-				String due_date = rs.getString("due_date");
-				int comp = rs.getInt("comp");
-				int imp = rs.getInt("importance");
-				TodoItem t = new TodoItem(category, title, desc, due_date);	// java:카테고리##이름##설명##마감##등록시간	db:번호##이름##설명##카테고리##마감##등록시간
-				t.setComp(comp);
-				t.setImp(imp);
-				list.add(t);
+		for (int i = q-6;i<q+1;i++) {
+			if (q-6<=0) continue;
+			PreparedStatement prtmt;
+			String sql = "Select * from list where due_date=?;";
+//			String sql = "select * from list where category like '%?%';";
+			try {
+				prtmt = conn.prepareStatement(sql);
+				prtmt.setInt(1, 20211000+i);
+				ResultSet rs = prtmt.executeQuery();
+				while(rs.next()) {
+					String category = rs.getString("category");
+					String title = rs.getString("title");
+					String desc = rs.getString("memo");
+					String due_date = rs.getString("due_date");
+					int comp = rs.getInt("comp");
+					int imp = rs.getInt("importance");
+					TodoItem t = new TodoItem(category, title, desc, due_date);	// java:카테고리##이름##설명##마감##등록시간	db:번호##이름##설명##카테고리##마감##등록시간
+					t.setComp(comp);
+					t.setImp(imp);
+					t.setId(i);
+					list.add(t);
+				}
+				prtmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-			prtmt.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} return list;
+		}
+		 return list;
 	}
 }
