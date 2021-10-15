@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import com.todo.dao.TodoList;
 import com.todo.menu.Menu;
+import com.todo.service.CalendarMaker;
 import com.todo.service.TodoUtil;
 
 public class TodoMain {
@@ -99,6 +100,11 @@ public class TodoMain {
 			case "exit":
 				quit = true;
 				break;
+				
+			case "calemdar":
+				CalendarMaker.showMaker(l);
+				break;
+				
 
 			default:
 				System.out.println("정해진 명령어를 사용하십시오.\n도움이 필요하다면 help 명령어를 입력하시오.\n");
