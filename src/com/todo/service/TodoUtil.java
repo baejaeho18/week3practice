@@ -80,7 +80,7 @@ public class TodoUtil {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 			String current = sdf.format(today);
 			if(Integer.parseInt(item.getDue_date()) - Integer.parseInt(current) <= 7 && item.getComp()==0) {
-				System.err.print(item.toString());
+				System.out.print("\u001B[31m"+item.toString()+"\u001B[0m");
 			}
 			else System.out.print(item.toString());
 		}
@@ -93,7 +93,7 @@ public class TodoUtil {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 			String current = sdf.format(today);
 			if(Integer.parseInt(item.getDue_date()) - Integer.parseInt(current) <= 7 && item.getComp()==0) {
-				System.err.print(item.toString());
+				System.out.print("\u001B[31m"+item.toString()+"\u001B[0m");
 			}
 			else System.out.print(item.toString());
 		}
@@ -108,7 +108,7 @@ public class TodoUtil {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 			String current = sdf.format(today);
 			if(Integer.parseInt(item.getDue_date()) - Integer.parseInt(current) <= 7 && item.getComp()==0) {
-				System.err.print(item.toString());
+				System.out.print("\u001B[31m"+item.toString()+"\u001B[0m");
 			}
 			else System.out.print(item.toString());
 			count++;
@@ -123,7 +123,7 @@ public class TodoUtil {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 			String current = sdf.format(today);
 			if(Integer.parseInt(item.getDue_date()) - Integer.parseInt(current) <= 7 && item.getComp()==0) {
-				System.err.print(item.toString());
+				System.out.print("\u001B[31m"+item.toString()+"\u001B[0m");
 			}
 			else System.out.print(item.toString());
 			count ++;
@@ -154,7 +154,7 @@ public class TodoUtil {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 			String current = sdf.format(today);
 			if(Integer.parseInt(item.getDue_date()) - Integer.parseInt(current) <= 7 && item.getComp()==0) {
-				System.err.print(item.toString());
+				System.out.print("\u001B[31m"+item.toString()+"\u001B[0m");
 			}
 			else System.out.print(item.toString());
 			count ++;
@@ -239,7 +239,7 @@ public class TodoUtil {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 			String current = sdf.format(today);
 			if(Integer.parseInt(item.getDue_date()) - Integer.parseInt(current) <= 7 && item.getComp()==0) {
-				System.err.print(item.toString());
+				System.out.print("\u001B[31m"+item.toString()+"\u001B[0m");
 			}
 			else System.out.print(item.toString());
 			count ++;
