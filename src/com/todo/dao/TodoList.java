@@ -60,7 +60,7 @@ public class TodoList {
 
 	public int addItem(TodoItem t) {
 		String sql = "insert into list (title, memo, category, current_date, due_date, comp, importance, mate)"+
-				" values (?,?,?,?,?,0,0,0);";
+				" values (?,?,?,?,?,0,?,0);";
 		PreparedStatement pstmt;
 		int count =0;
 		try {
@@ -70,6 +70,7 @@ public class TodoList {
 			pstmt.setString(3, t.getCategory());
 			pstmt.setString(4, t.getCurrent_date());
 			pstmt.setString(5, t.getDue_date());
+			pstmt.setInt(6, t.getImp());	// regular명령어을 위해 추가함.
 			count = pstmt.executeUpdate();
 			pstmt.close();
 		} catch (SQLException e) {
@@ -470,5 +471,34 @@ public class TodoList {
 			}
 		}
 		 return list;
+	}
+	public ArrayList<TodoItem> regularItem(int id) {
+		ArrayList<TodoItem> list = new ArrayList<TodoItem>();
+		PreparedStatement prtmt;
+		String sql = "Select * from list where id =?;";
+		try {
+			prtmt = conn.prepareStatement(sql);
+			prtmt.setInt(1, id);
+			ResultSet rs = prtmt.executeQuery();
+			while(rs.next()) {
+				String category = rs.getString("category");
+				String title = rs.getString("title");
+				String desc = rs.getString("memo");
+				String due_date = rs.getString("due_date");
+				String current_date = rs.getString("current_date");
+				int imp = rs.getInt("importance");
+				int mate = rs.getInt("mate");
+				TodoItem t = new TodoItem(category, title, desc, due_date);	// java:카테고리##이름##설명##마감##등록시간	db:번호##이름##설명##카테고리##마감##등록시간
+				t.setId(id);
+				t.setCurrent_date(current_date);
+				t.setComp(0);
+				t.setImp(imp);
+				t.setMate(mate);
+				list.add(t);
+			}
+			prtmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} return list;
 	}
 }

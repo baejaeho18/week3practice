@@ -105,6 +105,9 @@ public class TodoMain {
 				CalendarMaker.showMaker(l);
 				break;
 				
+			case "regular":
+				Regular.event(l);
+				break;
 
 			default:
 				System.out.println("정해진 명령어를 사용하십시오.\n도움이 필요하다면 help 명령어를 입력하시오.\n");

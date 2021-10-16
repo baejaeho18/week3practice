@@ -27,7 +27,9 @@ public class TodoItem {
         this.imp = 0;
         this.mate = 0;
     }
-    public int getId() {
+    public TodoItem() {
+	}
+	public int getId() {
 		return id;
 	}
     public void setId(int id) {

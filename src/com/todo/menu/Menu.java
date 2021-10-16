@@ -25,7 +25,9 @@ public class Menu {
         System.out.println("new! 15. ls_importance\t중요도 순서대로 검색");
         System.out.println("new! 16. mate <번호>\t참여할 인원수 입력");
         System.out.println("new! 17. find_mate <번호>\t동일한 참여자수를 가직 항목 출력");
-        System.out.println("14. exit\t나가기\n");
+        System.out.println("new! 18. calendar\t당월 일정을 달력에 표시");
+        System.out.println("new! 19. regular\t정기일정 등록(연례, 월례)");
+        System.out.println("20. exit\t나가기\n");
     }
 }
 
