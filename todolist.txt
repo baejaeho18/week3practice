@@ -1,6 +1,5 @@
 birth##cho##lyn##20211011##2021/09/24 23:23:30
 birth##dad##myungnam##20210830##2021/09/24 23:10:54
-birth##kim##musyung##20210715##2021/09/24 23:10:26
 birth##bae##jaeho##20210208##2021/09/24 23:09:48
 report##project##using-java##20210420##2021/09/25 24:14:27
 homework##data##structure##20210101##2021/09/25 24:39:14
@@ -11,11 +10,41 @@ homework##cal3##154pg-157pg##20211028##2021/10/10 21:52:33
 birth##jaeho##me##20220208##2021/10/15 13:09:41
 homework##erc_speach##marriage##20211020##2021/10/15 15:47:48
 homework##linear##367pg#5,6,7##20211025##2021/10/15 15:53:23
-birth##bae##jaeho##20220208##2021/09/24 23:09:48
 homework##erc_speach##marriage##20221020##2021/10/15 15:47:48
 club##linux##hackers##20100401##2021/09/25 24:40:01
 homework##discrete##each CH#1~10##20211007##2021/10/16 14:01:07
 teamproject##discreteMath##study##20211115##2021/10/16 18:09:28
-birth##cho##lyn##20221011##2021/09/24 23:23:30
 midterm##Discrete##CH1~6##20211021##2021/10/16 17:46:21
-mideterm##datastructure##CH01-20##20211020##2021/10/16 17:48:21
+midterm##DataStructure##CH01-20##20211020##2021/10/17 22:33:19
+midterm##Linear##CH01-04##20212022##2021/10/17 17:05:49
+midterm##PracProj1##CH01-13##20211026##2021/10/17 17:16:20
+midterm##PracProj1_2##CH01-13##20211126##2021/10/17 17:16:20
+midterm##PracProj1_2_3##CH01-13##20211226##2021/10/17 17:16:20
+homework##dIscrete##CH05#1~15##20211019##2021/10/17 21:55:52
+midterm##Java##CH01~06##20211019##2021/10/17 21:56:20
+report##essay##erc##20211024##2021/10/17 21:57:05
+midterm##philo##until Kant##20211025##2021/10/17 21:58:50
+homework##queue##DS##20211101##2021/10/17 21:59:42
+preview##descarte##143pg##20211001##2021/10/17 22:00:38
+cash##TAsubmit##philosopy##20211031##2021/10/17 22:01:25
+preview##kant##philosopy##20211105##2021/10/17 22:02:10
+study##hackers##linux##20211002##2021/10/17 22:02:42
+study##Linux##hackers##20210918##2021/10/17 22:03:20
+homework##DS##binary tree##20211030##2021/10/17 22:04:01
+study##diScrete##in club##20210930##2021/10/17 22:04:37
+study##major##20211016##20211016##2021/10/17 22:05:02
+study##Major##for PP_PP##20211002##2021/10/17 22:06:03
+euntae##hungry##close##20211016##2021/10/17 22:06:50
+refresh##badminton##duce##20211003##2021/10/17 22:07:43
+refresh##badminton_1##duce##20211103##2021/10/17 22:08:11
+indoor##cleans##room cleaning##20211115##2021/10/17 22:09:03
+indoor##judo##hanmajiro##20211015##2021/10/17 22:09:31
+indoor##hanmajiro##judo club##20211115##2021/10/17 22:10:00
+club##badmintons##duice##20211004##2021/10/17 22:10:29
+midterm##philoso##til Kant##20211025##2021/10/17 22:11:33
+midterm##quiz##PracProject1##20211026##2021/10/17 22:12:07
+refresh##home##going home##20211029##2021/10/17 22:12:57
+homework##javaFX##Olympic flag##20211008##2021/10/17 22:14:03
+homework##java_1##movie reservation##20211018##2021/10/17 22:15:03
+club##judo_1##court meeting##20211025##2021/10/17 22:16:17
+homework##PP_PP##movie making##20211017##2021/10/17 22:26:30
