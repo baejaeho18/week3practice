@@ -468,7 +468,6 @@ public class TodoList {
 					int comp = rs.getInt("comp");
 					int imp = rs.getInt("importance");
 					TodoItem t = new TodoItem(category, title, desc, due_date);
-// java:카테고리##이름##설명##마감##등록시간	db:번호##이름##설명##카테고리##마감##등록시간
 					t.setComp(comp);
 					t.setImp(imp);
 					t.setId(i);
@@ -512,3 +511,16 @@ public class TodoList {
 		} return list;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
