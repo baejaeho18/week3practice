@@ -1,11 +1,11 @@
 package com.todo;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.todo.dao.TodoList;
 import com.todo.menu.Menu;
 import com.todo.service.CalendarMaker;
+import com.todo.service.Regular;
 import com.todo.service.TodoUtil;
 
 public class TodoMain {
@@ -16,8 +16,6 @@ public class TodoMain {
 		TodoList l = new TodoList();
 //		l.importData("todolist.txt");
 		boolean quit = false;
-		// 3_2 파일 저장
-//		TodoUtil.loadList(l, "todolist.txt");			// ?????? 왜 자꾸 L로 자동변환되지???
 		do {
 			Menu.prompt();
 			String choice = sc.next();
@@ -110,7 +108,8 @@ public class TodoMain {
 				break;
 
 			default:
-				System.out.println("정해진 명령어를 사용하십시오.\n도움이 필요하다면 help 명령어를 입력하시오.\n");
+				System.out.println("정해진 명령어를 사용하십시오."
+						+ "\n도움이 필요하다면 help 명령어를 입력하시오.\n");
 				break;
 			}
 		} while (!quit);

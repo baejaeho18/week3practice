@@ -1,4 +1,4 @@
-package com.todo;
+package com.todo.service;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -23,10 +23,11 @@ public class Regular {
 			for(int i=1;i<re;i++) {
 				int due = Integer.parseInt(t.getDue_date()) + 10000;
 				String new_due_date = Integer.toString(due);
+				t.setTitle(t.getTitle()+"'");
 				t.setDue_date(new_due_date);
 				l.addItem(t);
 			}
-			System.out.println(num+"번 항목이 "+re+"회 시행되는 월례행사로 등록되었습니다.\n");
+			System.out.println(num+"번 항목이 "+re+"회 시행되는 연례행사로 등록되었습니다.\n");
 		}
 		else if(choice.equals("M")) {	// 월례 행사
 			for(int i=1;i<re;i++) {
@@ -34,12 +35,12 @@ public class Regular {
 				if((due/100)%100 >12) due = due-1200+10000;
 				String new_due_date = Integer.toString(due);
 				t.setDue_date(new_due_date);
+				t.setTitle(t.getTitle()+"'");
 				l.addItem(t);
 			}
 			System.out.println(num+"번 항목이 "+re+"회 시행되는 월례행사로 등록되었습니다.\n");
 		}
 		else System.out.println("지시된 문자(M/Y/x)를 올바르게 입력하지 않았습니다.\n");
-		
 	}
 
 }

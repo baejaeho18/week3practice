@@ -116,23 +116,24 @@ public class TodoItem {
     }
 	@Override
 	public String toString() {
-		String isimp ="";
-		for (int i=0;i<imp;i++) {
-			isimp += "*";
-		}
+		String isimp = "";
+		for (int i=0;i<imp;i++) isimp += "*";
 		
 		String iscomp = "";
 		if(comp != 0) iscomp = "(¿Ï·á)";
 		
 		String mate_num ="";
 		if(mate>0) mate_num= " ("+mate+"¸í)";
-		
-//		String date_due = due_date.substring(0,4)+"-"+due_date.substring(4,6)+"-"+due_date.substring(6,8);
-//		Date d = Date.valueOf(date_due);
-//		LocalTime time = LocalTime.now();
-		
-		return id + "  ["+ category +"]\t"+ title + iscomp +"\t"+ desc + mate_num +"\t"+ isimp +
-				 due_date.substring(0,4)+"/"+due_date.substring(4,6)+"/"+due_date.substring(6,8)
-   			+"\t( "+ current_date +" )\n";
+
+		String output =  id + "  ["+ category +"]\t"+ title + iscomp +"\t"+ desc + mate_num +"\t"+ isimp
+				 + due_date.substring(0,4)+"/"+due_date.substring(4,6)+"/"+due_date.substring(6,8)
+				 + "\t( "+ current_date +" )\n";
+
+		Date today = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		String current = sdf.format(today);
+		if(Integer.parseInt(due_date) - Integer.parseInt(current) <= 7 && comp==0)
+			return "\u001B[31m"+output+"\u001B[0m";
+		else return output;
 	}
 }

@@ -25,7 +25,7 @@ public class TodoUtil {
 		category = s.next();
 		s.nextLine();	// 왜 필요한지 알지?
 		System.out.print("세부 설명을 입력하시오.\n>");
-		desc = s.nextLine().trim();	// trim 앞뒤 공백 제거
+		desc = s.nextLine().trim();	
 		System.out.print("기한을 입력하십시오(YYYYMMDD).\n>");
 		due_date = s.next();
 		TodoItem t = new TodoItem(category, title, desc, due_date);
@@ -34,26 +34,18 @@ public class TodoUtil {
 	/// TA세션 질문!!!! sc.close() -> s.close() 안되는 이유?
 
 	public static void deleteItem(TodoList l) {
-		System.out.print("\n========== 기존 항목 삭제\n삭제할 항목의 번호를 입력하시오.\n>");
+		System.out.print("\n========== 기존 항목 삭제\n삭제할 항목의 번호를 입력하시오.(복수 입력 가능)\n>");
 		Scanner s = new Scanner(System.in);
 		String ids = s.nextLine();
 		String[] id;
 		id = ids.split(" ");
-		if(l.deleteItem(id)>0) System.out.println(id+"번 항목은 삭제되었습니다.\n");	// id는 db일련번호로 1부터 시작
+		if(l.deleteItem(id)>0) System.out.println(id.length+"개 항목은 삭제되었습니다.\n");
 	}
 
 	public static void updateItem(TodoList l) {
 		Scanner s = new Scanner(System.in);
 		System.out.print("\n========== 기존 항목 수정\n수정할 항목 번호를 입력하시오.\n>" );
 		int id = s.nextInt();
-//		for (TodoItem item : l.getList()) {
-//			int cnt=0;
-//			if (item.getId() != id) cnt++;
-//			if(l.getCount() == cnt) {
-//				System.out.println("존재하지 않는 항목입니다.\n");
-//				return;
-//			}
-//		}
 		System.out.print("해당 항목에서 수정하려는 이름을 입력하시오.\n>");
 		String new_title = s.next().trim();
 		if (l.isDuplicate(new_title)) {
@@ -74,28 +66,15 @@ public class TodoUtil {
 	
 	public static void listAll(TodoList l) {
 		System.out.println("\n========== 모든 항목 출력(총 "+l.getCount()+"개)\n");
-//		int serial_num = 1;
 		for (TodoItem item : l.getList()) {
-			Date today = new Date();
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-			String current = sdf.format(today);
-			if(Integer.parseInt(item.getDue_date()) - Integer.parseInt(current) <= 7 && item.getComp()==0) {
-				System.out.print("\u001B[31m"+item.toString()+"\u001B[0m");
-			}
-			else System.out.print(item.toString());
+			System.out.print(item.toString());
 		}
 		System.out.println("");
 	}
 	public static void listAll(TodoList l, String orderby, int odering) {
 		System.out.println("\n========== 모든 항목 출력(총 "+l.getCount()+"개)\n");
 		for (TodoItem item : l.getOrderedList(orderby, odering)) {
-			Date today = new Date();
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-			String current = sdf.format(today);
-			if(Integer.parseInt(item.getDue_date()) - Integer.parseInt(current) <= 7 && item.getComp()==0) {
-				System.out.print("\u001B[31m"+item.toString()+"\u001B[0m");
-			}
-			else System.out.print(item.toString());
+			System.out.print(item.toString());
 		}
 		System.out.println("");
 	}
@@ -104,14 +83,8 @@ public class TodoUtil {
 		System.out.print("\n========== 제목 내용 검색\n");
 		int count=0;
 		for (TodoItem item : l.getList(keyword)) {
-			Date today = new Date();
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-			String current = sdf.format(today);
-			if(Integer.parseInt(item.getDue_date()) - Integer.parseInt(current) <= 7 && item.getComp()==0) {
-				System.out.print("\u001B[31m"+item.toString()+"\u001B[0m");
-			}
-			else System.out.print(item.toString());
-			count++;
+			System.out.print(item.toString());
+			count ++;
 		}
 		System.out.println("\n검색 결과 총 " + count + "개.\n");
 	}
@@ -119,13 +92,7 @@ public class TodoUtil {
 		System.out.print("\n========== 카테고리 검색\n");
 		int count =0;
 		for (TodoItem item : l.getCategory(cate_keyword)) {
-			Date today = new Date();
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-			String current = sdf.format(today);
-			if(Integer.parseInt(item.getDue_date()) - Integer.parseInt(current) <= 7 && item.getComp()==0) {
-				System.out.print("\u001B[31m"+item.toString()+"\u001B[0m");
-			}
-			else System.out.print(item.toString());
+			System.out.print(item.toString());
 			count ++;
 		}
 		System.out.println("\n검색 결과 총 "+ count + "개.\n");
@@ -144,19 +111,12 @@ public class TodoUtil {
 		int count = l.completeItem(complete);
 		if(count == 0) System.out.println("\n해당 번호로 등록된 항목이 존재하지않습니다.\n");
 		else System.out.println("\n총 "+ count + "개의 항목이 완료체크되었습니다.\n");
-		// 나중엔 번호 여러개 입력 받아서 한번에? while(sc.next();)?
 	}
 	public static void find_comp(TodoList l) {
 		System.out.print("\n========== 완료된 항목만 확인\n");
 		int count=0;
 		for (TodoItem item : l.getComp()) {
-			Date today = new Date();
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-			String current = sdf.format(today);
-			if(Integer.parseInt(item.getDue_date()) - Integer.parseInt(current) <= 7 && item.getComp()==0) {
-				System.out.print("\u001B[31m"+item.toString()+"\u001B[0m");
-			}
-			else System.out.print(item.toString());
+			System.out.print(item.toString());
 			count ++;
 		}
 		System.out.println("\n검색 결과 총 "+ count + "개.\n");
@@ -170,7 +130,8 @@ public class TodoUtil {
 			System.out.println("숫자를 알맞게 입력했는지 확인하시오.\n");
 			return;
 		}
-		if (l.importance(impo_id, important) > 0) System.out.println("\n"+impo_id+"번 항목이 중요도 "+important+"(으)로 지정되었습니다.\n");
+		if (l.importance(impo_id, important) > 0)
+			System.out.println("\n"+impo_id+"번 항목이 중요도 "+important+"(으)로 지정되었습니다.\n");
 		else System.out.println("\n중요도 지정 실패. 존재하지 않는 항목입니다.\n");
 	}
 
@@ -183,12 +144,20 @@ public class TodoUtil {
 		if(l.mate(mate_id, member) > 0) System.out.println("\n인원수 기입이 완료되었습니다!\n");
 		else System.out.println("\n존재하지 않는 번호입니다.\n");
 	}
+	public static void find_mate(TodoList l, int mates) {
+		System.out.printf("\n========== 참여자 수가 %d명인 항목을 검색합니다.\n", mates);
+		int count=0;
+		for (TodoItem item : l.getList(mates)) {
+			System.out.print(item.toString());
+			count ++;
+		}
+		System.out.println("\n검색 결과 총 "+ count + "개.\n");
+	}
 		
 	
-	 // 프로그램 시작 시 읽기 & 종료 시 저장
+	// 프로그램 시작 시 읽기 & 종료 시 저장
 	public static void saveList(TodoList l, String filename) {
 		try {
-			//File file = new File("todolist.txt");
 			Writer w = new FileWriter(filename);
 			int count=0;
 			for (TodoItem item : l.getList()) {
@@ -203,48 +172,20 @@ public class TodoUtil {
 			e.printStackTrace();
 		}
 	}
-//	public static void loadList(TodoList l, String filename) {
-//		try {
-//			BufferedReader br = new BufferedReader(new FileReader(filename));
-//			String items;
-//			int count=0;
-//			while( (items = br.readLine()) != null) {
-//				StringTokenizer st = new StringTokenizer(items, "##");
-//				String category = st.nextToken();
-//				String title = st.nextToken();
-//				String desc = st.nextToken();
-//				String due_date = st.nextToken();
-//				String current_date = st.nextToken();
-//				TodoItem t = new TodoItem(category, title, desc, due_date);
-//				t.setCurrent_date(current_date);
-//				l.addItem(t);
-//				count++;
-////				System.out.println(title+desc+current_date);
-//			}
-//			br.close();
-//			System.out.println(count+"개의 항목이 "+filename+"에서 저장되었습니다.");
-//		} catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//	}
+	/*
+	 * // public static void loadList(TodoList l, String filename) { // try { //
+	 * BufferedReader br = new BufferedReader(new FileReader(filename)); // String
+	 * items; // int count=0; // while( (items = br.readLine()) != null) { //
+	 * StringTokenizer st = new StringTokenizer(items, "##"); // String category =
+	 * st.nextToken(); // String title = st.nextToken(); // String desc =
+	 * st.nextToken(); // String due_date = st.nextToken(); // String current_date =
+	 * st.nextToken(); // TodoItem t = new TodoItem(category, title, desc,
+	 * due_date); // t.setCurrent_date(current_date); // l.addItem(t); // count++;
+	 * //// System.out.println(title+desc+current_date); // } // br.close(); //
+	 * System.out.println(count+"개의 항목이 "+filename+"에서 저장되었습니다."); // } catch
+	 * (FileNotFoundException e) { // e.printStackTrace(); // } catch (IOException
+	 * e) { // e.printStackTrace(); // } // }
+	 */
 
-
-	public static void find_mate(TodoList l, int mates) {
-		System.out.printf("\n========== 참여자 수가 %d명인 항목을 검색합니다.\n", mates);
-		int count=0;
-		for (TodoItem item : l.getMate(mates)) {
-			Date today = new Date();
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-			String current = sdf.format(today);
-			if(Integer.parseInt(item.getDue_date()) - Integer.parseInt(current) <= 7 && item.getComp()==0) {
-				System.out.print("\u001B[31m"+item.toString()+"\u001B[0m");
-			}
-			else System.out.print(item.toString());
-			count ++;
-		}
-		System.out.println("\n검색 결과 총 "+ count + "개.\n");
-	}
 	
 }

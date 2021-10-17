@@ -28,8 +28,9 @@ public class TodoList {
 		try {
 			br = new BufferedReader(new FileReader(filename));
 			String line;
-			String sql = "insert into list (title, memo, category, current_date, due_date, comp, importance, mate)"+
-					" values (?,?,?,?,?,0,0,0);";
+			String sql = "insert into list "
+						+ "(title, memo, category, current_date, due_date, comp, importance, mate)"
+						+ " values (?,?,?,?,?,0,0,0);";
 			int records = 0;
 			while((line = br.readLine()) != null) {
 				StringTokenizer st = new StringTokenizer(line, "##");
@@ -59,8 +60,9 @@ public class TodoList {
 	}
 
 	public int addItem(TodoItem t) {
-		String sql = "insert into list (title, memo, category, current_date, due_date, comp, importance, mate)"+
-				" values (?,?,?,?,?,0,?,0);";
+		String sql = "insert into list "
+				+ "(title, memo, category, current_date, due_date, comp, importance, mate)"
+				+ " values (?,?,?,?,?,0,?,0);";
 		PreparedStatement pstmt;
 		int count =0;
 		try {
@@ -95,7 +97,8 @@ public class TodoList {
 	}
 
 	public int updateItem(TodoItem t, int id) {
-		String sql = "update list set title=?, memo=?, category=?, current_date=?, due_date=?, comp=0, importance=0, mate=0 where id = ?;";
+		String sql = "update list set title=?, memo=?, category=?, current_date=?, due_date=?,"
+				+ " comp=0, importance=0, mate=0 where id = ?;";
 		PreparedStatement pstmt;
 		int count =0;
 		try {
@@ -130,7 +133,8 @@ public class TodoList {
 				int comp = rs.getInt("comp");
 				int imp = rs.getInt("importance");
 				int mate = rs.getInt("mate");
-				TodoItem t = new TodoItem(category, title, desc, due_date);	// java:카테고리##이름##설명##마감##등록시간	db:번호##이름##설명##카테고리##마감##등록시간
+				TodoItem t = new TodoItem(category, title, desc, due_date);
+				// java:카테고리##이름##설명##마감##등록시간	db:번호##이름##설명##카테고리##마감##등록시간
 				t.setId(id);
 				t.setCurrent_date(current_date);
 				t.setComp(comp);
@@ -162,7 +166,8 @@ public class TodoList {
 		Statement stmt;
 		try {
 			stmt = conn.createStatement();
-			String sql = "select * from list order by " + orderby;	//title, due_date, desc....
+			String sql = "select * from list order by " + orderby;
+			//title, due_date, desc....
 			if (ordering==0) sql += " desc";
 			ResultSet rs = stmt.executeQuery(sql);
 			while(rs.next()) {
@@ -175,7 +180,8 @@ public class TodoList {
 				int comp = rs.getInt("comp");
 				int imp = rs.getInt("importance");
 				int mate = rs.getInt("mate");
-				TodoItem t = new TodoItem(category, title, desc, due_date);	// java:카테고리##이름##설명##마감##등록시간	db:번호##이름##설명##카테고리##마감##등록시간
+				TodoItem t = new TodoItem(category, title, desc, due_date);
+				// java:카테고리##이름##설명##마감##등록시간	db:번호##이름##설명##카테고리##마감##등록시간
 				t.setId(id);
 				t.setCurrent_date(current_date);
 				t.setComp(comp);
@@ -209,7 +215,8 @@ public class TodoList {
 				int comp = rs.getInt("comp");
 				int imp = rs.getInt("importance");
 				int mate = rs.getInt("mate");
-				TodoItem t = new TodoItem(category, title, desc, due_date);	// java:카테고리##이름##설명##마감##등록시간	db:번호##이름##설명##카테고리##마감##등록시간
+				TodoItem t = new TodoItem(category, title, desc, due_date);
+				// java:카테고리##이름##설명##마감##등록시간	db:번호##이름##설명##카테고리##마감##등록시간
 				t.setId(id);
 				t.setCurrent_date(current_date);
 				t.setComp(comp);
@@ -241,7 +248,7 @@ public class TodoList {
 				int comp = rs.getInt("comp");
 				int imp = rs.getInt("importance");
 				int mate = rs.getInt("mate");
-				TodoItem t = new TodoItem(category, title, desc, due_date);	// java:카테고리##이름##설명##마감##등록시간	db:번호##이름##설명##카테고리##마감##등록시간
+				TodoItem t = new TodoItem(category, title, desc, due_date);
 				t.setId(id);
 				t.setCurrent_date(current_date);
 				t.setComp(comp);
@@ -287,7 +294,8 @@ public class TodoList {
 				String current_date = rs.getString("current_date");
 				int imp = rs.getInt("importance");
 				int mate = rs.getInt("mate");
-				TodoItem t = new TodoItem(category, title, desc, due_date);	// java:카테고리##이름##설명##마감##등록시간	db:번호##이름##설명##카테고리##마감##등록시간
+				TodoItem t = new TodoItem(category, title, desc, due_date);
+				// java:카테고리##이름##설명##마감##등록시간	db:번호##이름##설명##카테고리##마감##등록시간
 				t.setId(id);
 				t.setCurrent_date(current_date);
 				t.setComp(1);
@@ -370,6 +378,7 @@ public class TodoList {
 			e.printStackTrace();
 		} return count;
 	}
+	
 	public int mate(int mate_id, int member) {
 		PreparedStatement pstmt;
 		String sql = "update list set mate=? where id=?";
@@ -384,8 +393,7 @@ public class TodoList {
 			e.printStackTrace();
 		} return count;
 	}
-
-	public ArrayList<TodoItem> getMate(int mates){
+	public ArrayList<TodoItem> getList(int mates){
 		ArrayList<TodoItem> list = new ArrayList<TodoItem>();
 		PreparedStatement prtmt;
 		String sql = "Select * from list where mate =?;";
@@ -402,7 +410,7 @@ public class TodoList {
 				String current_date = rs.getString("current_date");
 				int imp = rs.getInt("importance");
 				int mate = rs.getInt("mate");
-				TodoItem t = new TodoItem(category, title, desc, due_date);	// java:카테고리##이름##설명##마감##등록시간	db:번호##이름##설명##카테고리##마감##등록시간
+				TodoItem t = new TodoItem(category, title, desc, due_date);
 				t.setId(id);
 				t.setCurrent_date(current_date);
 				t.setComp(1);
@@ -459,7 +467,8 @@ public class TodoList {
 					String due_date = rs.getString("due_date");
 					int comp = rs.getInt("comp");
 					int imp = rs.getInt("importance");
-					TodoItem t = new TodoItem(category, title, desc, due_date);	// java:카테고리##이름##설명##마감##등록시간	db:번호##이름##설명##카테고리##마감##등록시간
+					TodoItem t = new TodoItem(category, title, desc, due_date);
+// java:카테고리##이름##설명##마감##등록시간	db:번호##이름##설명##카테고리##마감##등록시간
 					t.setComp(comp);
 					t.setImp(imp);
 					t.setId(i);
@@ -488,7 +497,8 @@ public class TodoList {
 				String current_date = rs.getString("current_date");
 				int imp = rs.getInt("importance");
 				int mate = rs.getInt("mate");
-				TodoItem t = new TodoItem(category, title, desc, due_date);	// java:카테고리##이름##설명##마감##등록시간	db:번호##이름##설명##카테고리##마감##등록시간
+				TodoItem t = new TodoItem(category, title, desc, due_date);
+			// java:카테고리##이름##설명##마감##등록시간	db:번호##이름##설명##카테고리##마감##등록시간
 				t.setId(id);
 				t.setCurrent_date(current_date);
 				t.setComp(0);
